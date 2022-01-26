@@ -1,19 +1,39 @@
-# The largest heading
-## The second largest heading
+# Bash Scripting Tutorials for Beginners
 
-**This will bold your text**
+## **Bash**
+    Bash is a command language interpreter. By default in LINUX/UBUNTU I have bash interpreter.
 
-*this will italicize your txt*
+## **Shell**
+    Shell is a macro to interact with the command execution
 
-You can quote a text for more good looks.
+## **Scripting**
+    Scripting means writing a macro to task you do repeatitively.
 
-> Text that will be quote
+> Bash scripting is a must skill for any Linux system administration job; and it is implictly required
 
-use `git status` to list all new or modified files that haven't yet been commited
+## Tyring your bash shell
+try `date`, `cal`, `pwd`, `ls`, etc followed by `ENTER` key. You will see that your bash shell will output somethings
 
-triple tick will make its own code blocks
+## What is Scripting?
+Imagine that you have to type all of the above code daily for your job, then this very simple looking task already starts to look like the tedious ones
+and likely to be error-prone in the future typing. Ideally, you would want to have a script written and you just run that script file daily.
+
+Lets make one script file for above task:
+- open editor and make `task.sh` file that contains exactly what above codes you type one line by line
+- Make this file executable using `chmod` command with option `+x` `chmod +x task.sh`
+- Run the file `./task.sh`
+
+There you have your first script file. Although basic, it will do your work.
+
+*Remember* our shell was bash shell (other types of shell do exists C shell), but in our script we never told this file to run
+in `bash` shell or to any. Luckily, your computer assume it is bash but a good programming habit is to tell it explicity on each script file. Like,
+
 ```
-git status
-git add
-git commit
-```
+#!/bin/bash
+
+date
+cal
+pwd
+ls
+
+We can know the path of SHELL by doing `echo $SHELL` should give `/bin/bash` 
