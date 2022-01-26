@@ -38,4 +38,9 @@ ls
 ```
 We can know which interpretar we have in our system by doing `echo $SHELL` should give `/bin/bash`.
 
+You can make a comment in the bash script file using `#` and put your comment in that line. The only exception is
+for the sha-bang first line, however, in that case it treats as a valid command.
 
+Any command that you put in the command line will do either of three things. Either produce `stdout`, `stderr` or do nothing.
+You can redirect the each output to check what your command did you can do: `>` to redirect `stdout`; `2>` to redirect 
+`stderr`, `&>` to redirect `stdout` and `stderr`
