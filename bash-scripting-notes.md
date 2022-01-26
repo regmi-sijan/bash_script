@@ -44,3 +44,21 @@ for the sha-bang first line, however, in that case it treats as a valid command.
 Any command that you put in the command line will do either of three things. Either produce `stdout`, `stderr` or do nothing.
 You can redirect the each output to check what your command did you can do: `>` to redirect `stdout`; `2>` to redirect 
 `stderr`, `&>` to redirect `stdout` and `stderr`
+
+# Function
+If you want to reuse the same code again and again, chances are you are wanting to make a function do that.
+Example: lets make a `function.sh` file and in that make `user_details` function that prints user details and also lets call
+the function to see if it works. To create a function, you start by saying function keyword name and open and close curly braces.
+The codes are in between the braces.
+```
+#!/bin/bash
+function user_details {
+    echo "User Name: $(whoami)"
+    echo "Home Directory: $HOME"
+}
+
+user_details
+```
+
+
+
