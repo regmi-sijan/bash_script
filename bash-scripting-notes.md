@@ -35,5 +35,7 @@ date
 cal
 pwd
 ls
+```
+We can know which interpretar we have in our system by doing `echo $SHELL` should give `/bin/bash`.
 
-We can know the path of SHELL by doing `echo $SHELL` should give `/bin/bash` 
+
