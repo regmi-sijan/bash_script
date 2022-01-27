@@ -61,8 +61,10 @@ user_details
 ```
 
 After you have tested and debugged the script, you will most likely take this file into your `/usr/local/bin` (as `root` of course), in order to
-make the script available to yourself and all other users as a systematic executable. Then the script can be invoked simply sy typing 
+make the script available to yourself and all other users as a systematic executable. Then the script can be invoked simply by typing 
 **scriptname [ENTER]** from the command-line.
+
+# Part 2. Basics
 
 
 
