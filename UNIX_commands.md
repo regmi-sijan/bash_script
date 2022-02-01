@@ -1,3 +1,6 @@
+I want to point out that a very-good UNIX/LINUX [tutorial](https://www.tutorialspoint.com/unix/index.htm) is there!
+
+
 # List of all the possible commands:
 
 ## Listings:
@@ -102,6 +105,117 @@ $ sort < bigFile > sortFile
 ## Pipes
 `pipe` connects the output of one to another and many connections are possible. `$ who | sort` give the list of names in your system
 in alphabetical orders.
+
+## Wildcards
+The character `*` is called a wildcard. So, if you do `$ ls list*` it will list files or dir that has `list` in the front and 
+whatever in the end; it doesn't matter. Similarly, you could have done `$ ls *list` and in this case your list will have anything in
+front but the end will have `list` at the back of it.
+
+The `*` matches any number of characters; while `?` matches only one character. So, `$ ls ?ouse` will match `house` and `mouse`, but not
+`grouse` since it has 2 letters before `ouse`.
+
+## File system security (access rights)
+```
+$ ls -l   \\ option -l is for long listing
+```
+You will see lots of details about the contents of the files inside the dir. If it was dir then left most will have `d` otherwise
+it will start with `-` dash. And so, `-rwx....` means the user has `read, write, execute` access to this file. We can change the file
+permission also.
+
+## Changing access rights
+**chmod (changing a file mode)**
+Only the owner of a file can use `chmod` to change the permission of a file. Example are:
+```
+$ chmod go-rwx filename
+```
+will remove read write and execute permission from **filename** for the group and others. Here options are:
+```
+u   user
+g   group
+o   other
+a   all
+r   read
+w   write
+x   execute
++   add permission
+-   take away permission
+```
+Another example:
+```
+$ chmod a+rw filename
+```
+will give read write permissions for the all to **filename**.
+
+## Processes and Jobs
+Running programming in your computer that has a unique **PID**. Just do
+``` $ ps
+```
+Process are sometimes running foreground, background or suspended. Some process will take long time and will hold the terminal from doing
+other jobs. So we need to learn how to **background** some of the tasks/jobs.
+
+**Running background processes**
+To background a process just type `&` at the end of the command line. Example:
+```
+$ sleep 10
+```
+will wait given 10 seconds before continuing and giving you terminal to work. But you can run this sleep in background;
+```
+$ sleep 10 &
+```
+And that will take care of the commands and take them to background. Similarly, sometimes `emacs` take away your terminal and so you do
+`&` at the end in that case as well.
+
+**Backgronding the current foreground process**
+```
+$ sleep 1000        // running sleep
+Ctrl+z              // suspend the process in the foreground
+$ bg                // take the foreground program to the background
+```
+
+## Killing a process
+Sometimes you require to kill the process because it went to the infinite loop.
+To kill the program running in the foreground `ctrl+c` will work.
+
+To kill the program suspended or background process:
+```
+$ sleep 100 &
+$ jobs          
+$ kill %4           // here 4 is the job number let's say
+```
+
+**ps (process status)**
+You could kill using PIDS
+```
+$ sleep 1000 &
+$ ps        // will list the PID to you
+$ kill PID_you_want
+```
+Type `ps` again to see its status. If the process refuses to be removed use `-9` option as
+```
+$ kill -9 PID_you_want
+```
+
+## UNIX Variables
+**Environment variables**
+`$ echo $OSTYPE` will tell what operating system you are using. Environment variables has all the letter UPPERCASE as you can see.
+You can see the list of all the environment variables in your system using `$ printenv | less`
+
+**Shell Variables**
+They are lowercase variables ex `$ echo $path` or `$ echo $history`. To see all of the defined variables you can do
+`$ set | less`
+
+## Using and setting variables
+Each time you login at UNIX or LInux host, the system looks in your home directory for the initialization files. Information in these files
+is used to set up your working environment. The `C` and `TC` shells uses two files called `.login` and `.cshrc`.
+
+At login the **C** shell first reads `.cshrc` followed by `.login` The guidelines is to set ENVIRONMENT VARIABLES to `.login` and SHELL variables
+to `.cshrc` file.
+
+## Setting shell variables in the `.cshrc` file
+Example to change the number of shell commands saved in the history list, you can set the history variable. It is 100 by default,
+but you can increase if you wish.
+`$ set history = 200`. Check if it worked by typing. `$ echo $history`. This will be temporary, to make it permanent change you need to add
+it to the `.cshrc` file. To re-read the `.cshrc` file, you could do `$ source .cshrc`.
 
 
 
