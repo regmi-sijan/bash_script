@@ -56,4 +56,5 @@ This command lets you to copy  multiple files and directories info into a single
 ```
 
 Example:
-`tar -cvf bin.tar /bin` creates an archive of the entire `/bin` directory into a file named `bin.tar`
+`tar -cvf bin.tar /bin` creates an archive of the entire `/bin` directory into a file named `bin.tar`. To see the list of files in the archive, use `-t` option as:
+`tar -tvf bin.tar`. To untar the archive or extract files from the archive, use `-x` option: `tar -xvf bin.tar`
