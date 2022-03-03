@@ -154,12 +154,30 @@ To view permission of dir-name
 ls -ld dir_name
 ```
 
-#Script
-* list of commands interpreted by a scripting language
+# Script
+* list of commands interpreted by a scripting language, scripting language are not compiled but interpreted during the run-time, so it is slower in running! but development of the code is faster
 * commands can be entered interactively or listed in a text file
 * used to automate processes
 
 ## Shell script
+It is a executable text file with interpreter directive, aka **shebang** directive `#!interpreter [optional-args]`. Here, `interpreter` is a path to an executable program,
+`optional-arg` is s single argument string.
+
+For **bash** shell: `#!/bin/bash`. Let's write down a simple *hello_world* script that will print hello world
+```
+$ touch hello_world.sh
+$ echo '#!/bin/bash' >> hello_world.sh
+$ echo 'echo Hello World' >> hello_world.sh       // >> is the redirection operator to append to the file
+```
+We need to make this file executable:
+
+First check: `$ ls -l hello_world.sh`   it might be `--rw-rw-r` with no `x` that means it is not executable.
+
+Next we need to change it to exectuable: `$ chmod +x hello_world.sh`       // it makes `-rwx-rwx-rx`
+
+Last, we run the script file:  `$ ./hello_world.sh`
+
+
 
 
 
