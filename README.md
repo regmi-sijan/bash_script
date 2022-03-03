@@ -320,3 +320,27 @@ sol:
 grep warning /var/log/bootstrap.log | tail -5
 ```
 
+## Scheduling jobs using Cron
+This is helpful when you might need to run certain jobs automatically at certain times. Example- load scripts at midnight every night, backup scripts to run every Sunday at 2 pm or something.
+
+**Crontab** file is a simple text file containing a list of commands meant to be run at specified times. It is edited using the *crontab* command.
+
+Each line is crontab file has five time-and-date fields, followed by a command, followed by a newline character `\n`. The fields are separated by spaces.
+
+```
+minute  (0-50)
+hour    (0-23, 0=midnight)
+day     (1-31)
+month   (1-12)
+weekday (0-6, 0=Sunday)
+```
+
+To use crontab:
+```
+$ crontab -l            // -l option prints the current crotab jobs list
+$ crontab -e            // if no jobs queued, create new crontab file (it should open this file in your default editor)
+```
+
+Let's say you put the following line in your crontab file:
+
+**0 21 \* \* \* echo "Welcome to cron" >> /tmp/echo.txt**
