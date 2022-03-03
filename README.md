@@ -57,4 +57,12 @@ This command lets you to copy  multiple files and directories info into a single
 
 Example:
 `tar -cvf bin.tar /bin` creates an archive of the entire `/bin` directory into a file named `bin.tar`. To see the list of files in the archive, use `-t` option as:
-`tar -tvf bin.tar`. To untar the archive or extract files from the archive, use `-x` option: `tar -xvf bin.tar`
+`tar -tvf bin.tar`. To untar the archive or extract files from the archive, use `-x` option: `tar -xvf bin.tar`.
+
+### zip
+zip command allows you to compress files. The following command creates a zip named `config.zip` and of all the files with extension `.conf` in the `/etc` directory
+```
+zip config.zip /etc/*.conf
+        -r option can be included to zip entire folder
+```
+The following command creates an archive of the `/bin` directory `zip -r bin.zip /bin`.
