@@ -49,9 +49,9 @@ $ wget        // download file from URL
 Now, let's discuss some of the important commands with more details and examples.
 #### tar
 This command lets you to copy  multiple files and directories info into a single file. Some of the options choices are:
-* -c   \tab   // create a new archive file
-* -v      // verbosely list files processed
-* -f      // archive file name
+* -c   \ \    // create a new archive file
+* -v    \  \   // verbosely list files processed
+* -f   \  \     // archive file name
 
 Example:
 `tar -cvf bin.tar /bin` creates an archive of the entire `/bin` directory into a file named `bin.tar`
