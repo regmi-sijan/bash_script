@@ -47,7 +47,7 @@ $ wget        // download file from URL
 `$ df -h  (shows amount of disk space available on the file system)` extra one to know more.
 
 Now, let's discuss some of the important commands with more details and examples.
-#### tar
+### tar
 This command lets you to copy  multiple files and directories info into a single file. Some of the options choices are:
 ```
  -c            // create a new archive file
@@ -66,3 +66,41 @@ zip config.zip /etc/*.conf
         -r option can be included to zip entire folder
 ```
 The following command creates an archive of the `/bin` directory `zip -r bin.zip /bin`.
+We can extract, list or test compressed files in a zip archive (unzip). The following command lists the files of the archive called `config.zip`
+```
+unzip -l config.zip
+```
+And, the following command extracts all the files in the archive `bin.zip`.
+```
+unzip bin.zip
+```
+### Permissions
+```
+--r    // read
+--w    // write
+--x    // execute
+```
+To see current permissions, `ls -l` or if you like to see the permission for a particular file `ls -l fileName.txt`, you should see something like
+```
+rw--r--r--          // (owner read and write, group owner read only, others read only)
+```
+Then we can now change the permissions of the file as per our requirements.
+
+`r, w, x`       // representing read, write, and execute permissions respectively
+`u, g, o`       // user categories owner, group, other
+`+, -`          // grant or revoke operations
+
+The command below removes read permission for usdoi.txt file (this permission is updated for all the user groups):
+```
+chmod -r usdoi.txt
+```
+Similarly, to add read permission to this file:
+```
+chomod +r usdoi.txt
+```
+To remove teh read permission for others category:
+```
+chmod o-r usdoi.txt
+```
+
+
