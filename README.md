@@ -109,6 +109,10 @@ chmod o-r usdoi.txt
 * to see the number of words `wc -w usdoi.txt`
 * to see the number of characters `wc -c usdoi.txt`
 
+## grep
+To perform search operations within the text, it allows you to specify patterns and search for lines matching the pattern, from the input text.
+The following 
+
 
 
 
