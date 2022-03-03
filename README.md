@@ -1,4 +1,4 @@
-## UNIX/LINUX commands and Bash Scripting
+# UNIX/LINUX commands and Bash Scripting
 
 Note: These notes are collected, compiled from different sources for my future references.
 ### Reference List
@@ -11,28 +11,68 @@ After you complete one or two of above, maybe you want to move to this advanced 
 
 A **shell** is a powerful user interface for UNIX-like operating system. It can interpret commands, and run other programs.
 
-### Working with files
+## Starting with some basics:
 ```
-$ cp      // copy file
-$ mv      // mv file (use to rename file as well)
-$ touch     // create empty file, or mostly used to update the timestamp a file
-$ chmod     // change/modify file permissions (more later)
-$ wc          // get counts of lines, words, characters in file (mostly used to count line with -l option)
-$ grep        // return line(s) in file matching the pattern
-$ rm -rf      // so powerful command to remove almost anything (files, directories)
-```
-
-### Navigating and Working with directories
-```
-$ ls          // list files and directories in the current directory
-$ find        // find files in the current direcotry tree (this and all the directory inside of it)
-$ pwd       // prints current working directory
-$ mkdir     // makes a new directory
-$ cd        // change directory
-$ rmdir     // remove directory
+$ pwd                   // tells you the current working directory with the complete path to reach from root dir
+$ ls                    // lists files and directories in your current dir
+$ ls -a                 // -a option allows you to list even the hidden files and folder
+$ mkdir <dir_name>      // makes the dir_name folder in current dir
+$ cd dir_name           // change your directory to this new dir_name folder
+$ cd ..                 // brings you one directory up (going backward in directory tree)
 ```
 
-### Compression and archiving
+**Trick**:
+If you want to just skim around different directories without actually changing your directory, you can do so using `$ ls` command. You can just **ls** the directories you want to quickly peek into and sort of use **up and down** arrow keys to quickly move back and forth to previoulsy typed areas. I always use this method to go into the very deep of the directory root and when I see where I want to go, I finally do up key and **cd** into this directory.
+
+**cd -** is another tip to quckly move back and forth between the current directory and the last directory area you visited.
+
+## Working with files
+```
+$ cp                            // copy file
+$ cp file1 file2                // makes copy of file1 in current dir and names if file2
+$ cp /path/of/file ./           // copies the file from this path to your current dir
+$ mv                            // mv file (use to rename file as well)
+$ mv file1 file2                // renames file1 to file2 (same contents inside)
+$ touch                         // create empty file, or mostly used to update the timestamp a file
+$ chmod                         // change/modify file permissions (more later)
+$ wc                            // get counts of lines, words, characters in file (mostly used to count line with -l option)
+$ grep                          // return line(s) in file matching the pattern
+$ rm <file_name>                // removes file_name
+$ rmdir <dir_name>              // removes dir_name
+$ rm -rf <file/dir_name>        // so powerful command to remove almost anything (files, directories)
+```
+
+## Displaying contents of file on the screen
+
+- `clear` will clear the screen. I also do `Ctrl + l` command for this
+- `cat <file_name>` will display the content of the file on the screen. It is not good for long file. Since it shows all at once
+- `touch <filename>` will create and/or updates the timestamps on the file
+- `less filename` will display contents in much better way. Here you can see more contents hitting enter key and q to quit. Here one page from top at a time
+- `head filename` will display first 10 lines on the screen. You can change the 10 to any like `head -20 filename`
+- `tail filename` will display last 10. Similarly you can change as: `tail -20 filename` to list last 20 lines to the screen
+
+## Searching the contents of the file
+* One way to do the search is using **less** command. Once you do `$ less file_name`, then in your less mode do `/search_word` to do the search. Once it finds, hit enter and do **n** for the next occurrence and so on.
+
+* Using **grep** is another way of doing this: To perform search operations within the text, it allows you to specify patterns and search for lines matching the pattern, from the input text. The following command prints all lines in the file `usdoi.txt` which contain the word **people**
+```
+grep people usdoi.txt
+```
+Some options:
+```
+-n              // along with the matching lines, print the line number also
+-c              // get the count of matching lines
+-i              // ignore the case of the text while matching
+-v              // print all lines which do not contain the pattern
+-w              // match only if the pattern matches whole words
+```
+One more example:
+```
+grep -v login /etc/passwd               // prints all lines from the /etc/passwd file, which do not contain the pattern login
+```
+* Using **find**: `$ find  // finds files in the current direcotry tree (this and all the directory inside of it)`.
+
+## Compression and archiving
 ```
 $ tar       // archive a set of files
         (allows you to copy multiple files and directories into a single archive file)
@@ -40,7 +80,7 @@ $ zip       // compress a set of files
 $ unzip     // extract files from a compressed zip archive
 ```
 
-### Networking
+## Networking
 ```
 $ hostname      // prints hostname
 $ ping        // send packets to URL and prints response, (CTRL-C) to cancel it
@@ -52,7 +92,7 @@ $ wget        // download file from URL
 `$ df -h  (shows amount of disk space available on the file system)` extra one to know more.
 
 Now, let's discuss some of the important commands with more details and examples.
-### tar
+## tar
 This command lets you to copy  multiple files and directories info into a single file. Some of the options choices are:
 ```
  -c            // create a new archive file
@@ -64,7 +104,7 @@ Example:
 `tar -cvf bin.tar /bin` creates an archive of the entire `/bin` directory into a file named `bin.tar`. To see the list of files in the archive, use `-t` option as:
 `tar -tvf bin.tar`. To untar the archive or extract files from the archive, use `-x` option: `tar -xvf bin.tar`.
 
-### zip
+## zip
 zip command allows you to compress files. The following command creates a zip named `config.zip` and of all the files with extension `.conf` in the `/etc` directory
 ```
 zip config.zip /etc/*.conf
@@ -79,7 +119,8 @@ And, the following command extracts all the files in the archive `bin.zip`.
 ```
 unzip bin.zip
 ```
-### Permissions
+## Permissions/ Chaning access rights
+Only the owner of a file can use `chmod` to change the permission of a file. Example like: `$ chomod go-rwx filename` will remove read, write, and execute permission from *filename* for the group and others. Another one: `$ chmod a+rw filename` will add to all the read, write permission to *filename*.
 ```
 --r    // read
 --w    // write
@@ -107,34 +148,56 @@ To remove teh read permission for others category:
 ```
 chmod o-r usdoi.txt
 ```
+## Processes and Jobs
+Running programming in your computer that has a unique **PID**. Just do `$ ps`. Process are sometimes running foreground, background or suspended. Some process will take long time and will hold the terminal from doing other jobs. So we need to learn how to put to **background** some of the tasks/jobs.
+
+**Running background processes**
+To background a process just type `&` at the end of the command line. Example:
+```
+$ sleep 10
+```
+will wait given 10 seconds before continuing and giving you terminal to work. But you can run this sleep in background;
+```
+$ sleep 10 &
+```
+And that will take care of the commands and take them to background. Similarly, sometimes `emacs` take away your terminal and so you do
+`&` at the end in that case as well.
+
+**Backgrounding the current foreground process**: already running thing can be also put into the background
+```
+$ sleep 1000        // running sleep
+Ctrl+z              // suspend the process in the foreground
+$ bg                // take the foreground program to the background
+```
+
+**Killing a process**
+Sometimes you require to kill the process because it went to the infinite loop.
+To kill the program running in the foreground `ctrl+c` will work.
+
+To kill the program suspended or background process:
+```
+$ sleep 100 &
+$ jobs          
+$ kill %4           // here 4 is the job number let's say
+```
+
+**ps (process status)**
+You could kill using PIDS
+```
+$ sleep 1000 &
+$ ps        // will list the PID to you
+$ kill PID_you_want
+```
+Type `ps` again to see its status. If the process refuses to be removed use `-9` option as
+```
+$ kill -9 PID_you_want
+```
 
 ## wc
 `wc usdoi.txt` prints the number of lines, words, and character in a file. 
 * To print only the number of lines: `wc -l usdoi.txt`
 * to see the number of words `wc -w usdoi.txt`
 * to see the number of characters `wc -c usdoi.txt`
-
-## grep
-To perform search operations within the text, it allows you to specify patterns and search for lines matching the pattern, from the input text.
-
-The following  command prints all lines in the file `usdoi.txt` which contain the word **people**
-```
-grep people usdoi.txt
-```
-
-Some options:
-```
--n              // along with the matching lines, print the line number also
--c              // get the count of matching lines
--i              // ignore the case of the text while matching
--v              // print all lines which do not contain the pattern
--w              // match only if the pattern matches whole words
-```
-
-One more example:
-```
-grep -v login /etc/passwd               // prints all lines from the /etc/passwd file, which do not contain the pattern login
-```
 
 ## Networking
 `hostname -l` to view ip address of the host
@@ -183,13 +246,13 @@ Next we need to change it to exectuable: `$ chmod +x hello_world.sh`       // it
 Last, we run the script file:  `$ ./hello_world.sh`
 
 ## Pipes and Filters
-Pipe command ` | `
+Pipe command ` | `  connects the output of one to another and long chain of connections are possible. `$ who | sort` gives the list of names in your system in alphabetical orders.
 
 - chaining sequences of filter commands `command1 | command2 | ...`
 - output of command1 is input of command2       `ls | sort -r`   // list sort in reverse order
 
 ## Shell variables
-It has scope limited to shell (not global).
+It has scope limited to shell (not global). They are all **small letters** to make easier to separate from Environment variables.
 
 To list all shell variables
 ```
@@ -205,14 +268,14 @@ $ echo $GREETINGS       // to see the value of this variable, we put $ sign infr
 **$ unset var_name**  // deletes var_name `$ unset GREETINGS`, then no longer now available
 
 ## Environment Variables
-It has extended scope. There are number of default environment variables, but you can also upgrade shell variables into the environment variables using **export**. Like **export var_name**.
+They are all CAPITAL letters. It has extended scope. There are number of default environment variables, but you can also upgrade shell variables into the environment variables using **export**. Like **export var_name**.
 ```
 $ export GREETINGS
 ```
 
-To list all of the environment variables:
+To list all of the environment variables: `$ printenv | less` to see in easier *less* way.
 ```
-$ env | grep "GREE"     // env will list all, grep GREE will list only those that starts with GREE
+$ printenv | grep "GREE"     // env will list all, grep GREE will list only those that starts with GREE
 ```
 
 ## Some useful features of the Bash shell
@@ -354,7 +417,7 @@ This means it should run in **0** min **21 hr** everyday, and the output of this
 
 Once you have created the crontab file, you might go back and check to see if the jobs are now schedule as you wish using `$ crontab -l`.
 
-### Schedule a Shell Script
+## Schedule a Shell Script
 Let's create a simple shell script file name *diskusage.sh* that prints the current time and the current disk usage statistics.
 ```
 #!/bin/bash
@@ -378,5 +441,6 @@ Put the following line into crontab file:
 
 Then, `$ crontab -l` to confirm that the job has been put into the schedule.
 
-### Remove the current crontab:
+## Remove the current crontab:
 The `-r` option `$ crontab -r` causes the current crontab to be removed. Be cautious doing this as it removes your entire scheduled crontab jobs.
+
