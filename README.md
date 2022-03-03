@@ -111,8 +111,48 @@ chmod o-r usdoi.txt
 
 ## grep
 To perform search operations within the text, it allows you to specify patterns and search for lines matching the pattern, from the input text.
-The following 
 
+The following  command prints all lines in the file `usdoi.txt` which contain the word **people**
+```
+grep people usdoi.txt
+```
+
+Some options:
+```
+-n              // along with the matching lines, print the line number also
+-c              // get the count of matching lines
+-i              // ignore the case of the text while matching
+-v              // print all lines which do not contain the pattern
+-w              // match only if the pattern matches whole words
+```
+
+One more example:
+```
+grep -v login /etc/passwd               // prints all lines from the /etc/passwd file, which do not contain the pattern login
+```
+
+## Networking
+`hostname -l` to view ip address of the host
+
+To test if the host is reachable:
+```
+ping www.google.com             // ctrl-c to cancel
+```
+
+To display contents from the web on the screen:
+```
+curl https://......./*.txt
+```
+
+To access given URL and save it in the current directory
+```
+curl- o https://..../*.txt
+```
+
+To view permission of dir-name
+```
+ls -ld dir_name
+```
 
 
 
