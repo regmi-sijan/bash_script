@@ -367,6 +367,11 @@ Let's schedule to run this scripts everyday at midnight 12:00 (0 in 24 hr clock)
 ```
 $ crontab -e            // edit the crontab file now
 ```
-Put the following line:
+Put the following line into crontab file:
 
-**0 0 \* \* \* /home/project/diskusage.sh >> /home/project/diskusage.log**
+**0 0 \* \* \* /home/project/diskusage.sh >> /home/project/diskusage.log**. The moment you put some commands into your crontab file, it is schedule as needed.
+
+Then, `$ crontab -l` to confirm that the job has been put into the schedule.
+
+### Remove the current crontab:
+The `-r` option `$ crontab -r` causes the current crontab to be removed. Be cautious doing this as it removes your entire scheduled crontab jobs.
