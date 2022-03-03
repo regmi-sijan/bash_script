@@ -344,3 +344,29 @@ $ crontab -e            // if no jobs queued, create new crontab file (it should
 Let's say you put the following line in your crontab file:
 
 **0 21 \* \* \* echo "Welcome to cron" >> /tmp/echo.txt**
+
+This means it should run in **0** min **21 hr** everyday, and the output of this crontab file is finally sent to the */tmp/echo.txt* file as well.
+
+Once you have created the crontab file, you might go back and check to see if the jobs are now schedule as you wish using `$ crontab -l`.
+
+### Schedule a Shell Script
+Let's create a simple shell script file name *diskusage.sh* that prints the current time and the current disk usage statistics.
+```
+#!/bin/bash
+date
+df -h
+```
+
+Then compile and run:
+```
+$ chmod +x diskusage.sh
+$ ./diskusage.sh
+```
+
+Let's schedule to run this scripts everyday at midnight 12:00 (0 in 24 hr clock). And, we want the output of this script be appended to */home/project/diskusage.log*:
+```
+$ crontab -e            // edit the crontab file now
+```
+Put the following line:
+
+**0 0 \* \* \* /home/project/diskusage.sh >> /home/project/diskusage.log**
