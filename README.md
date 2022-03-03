@@ -177,7 +177,47 @@ Next we need to change it to exectuable: `$ chmod +x hello_world.sh`       // it
 
 Last, we run the script file:  `$ ./hello_world.sh`
 
+## Pipes and Filters
+Pipe command ` | `
 
+- chaining sequences of filter commands `command1 | command2 | ...`
+- output of command1 is input of command2       `ls | sort -r`   // list sort in reverse order
 
+## Shell variables
+It has scope limited to shell (not global).
 
+To list all shell variables
+```
+$ set | head -4         // set will list all variables, but head -4 will restrict to only 4 of them to see
+```
 
+How to define shell-variables: **$ var_name=value**
+```
+$ GREETINGS="HELLO"            // we normally do all caps for the variables, and no spaces around = sign
+$ echo $GREETINGS       // to see the value of this variable, we put $ sign infront of it
+```
+
+**$ unset var_name**  // deletes var_name `$ unset GREETINGS`, then no longer now available
+
+## Environment Variables
+It has extended scope. There are number of default environment variables, but you can also upgrade shell variables into the environment variables using **export**. Like **export var_name**.
+```
+$ export GREETINGS
+```
+
+To list all of the environment variables:
+```
+$ env | grep "GREE"     // env will list all, grep GREE will list only those that starts with GREE
+```
+
+## Some useful features of the Bash shell
+### Metacharacters
+> #     // precedes a comment
+> ;     // command separator `$ echo "Hello"; whoami` will exectue both commands one after another
+> *     // wildcard one or any number of times
+> ?     // wildcard for only one number of time
+> \     // escape character `$ echo "\$1 each"` will print $1 as a literal text
+> double quote " "              // evaluates the metacharacter as normal, need escape to avoid metacharacters
+> single quote ' '              // interpret everything literally, don't need escape for other metacharacters
+
+## I/O redirection
