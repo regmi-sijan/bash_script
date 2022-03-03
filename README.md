@@ -212,12 +212,14 @@ $ env | grep "GREE"     // env will list all, grep GREE will list only those tha
 
 ## Some useful features of the Bash shell
 ### Metacharacters
-> #     // precedes a comment
-> ;     // command separator `$ echo "Hello"; whoami` will exectue both commands one after another
-> *     // wildcard one or any number of times
-> ?     // wildcard for only one number of time
-> \     // escape character `$ echo "\$1 each"` will print $1 as a literal text
-> double quote " "              // evaluates the metacharacter as normal, need escape to avoid metacharacters
-> single quote ' '              // interpret everything literally, don't need escape for other metacharacters
+```
+ #     // precedes a comment
+ ;     // command separator `$ echo "Hello"; whoami` will exectue both commands one after another
+ *     // wildcard one or any number of times
+ ?     // wildcard for only one number of time
+ \     // escape character `$ echo "\$1 each"` will print $1 as a literal text
+ double quote " "              // evaluates the metacharacter as normal, need escape to avoid metacharacters
+ single quote ' '              // interpret everything literally, don't need escape for other metacharacters
+```
 
 ## I/O redirection
