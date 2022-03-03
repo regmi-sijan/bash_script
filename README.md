@@ -154,5 +154,12 @@ To view permission of dir-name
 ls -ld dir_name
 ```
 
+#Script
+* list of commands interpreted by a scripting language
+* commands can be entered interactively or listed in a text file
+* used to automate processes
+
+## Shell script
+
 
 
