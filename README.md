@@ -103,4 +103,12 @@ To remove teh read permission for others category:
 chmod o-r usdoi.txt
 ```
 
+## wc
+`wc usdoi.txt` prints the number of lines, words, and character in a file. 
+* To print only the number of lines: `wc -l usdoi.txt`
+* to see the number of words `wc -w usdoi.txt`
+* to see the number of characters `wc -c usdoi.txt`
+
+
+
 
