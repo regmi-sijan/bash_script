@@ -3,6 +3,11 @@
 Note: These notes are collected, compiled from different sources for my future references.
 ### Reference List
 * [Coursera IBM Course](https://www.coursera.org/learn/hands-on-introduction-to-linux-commands-and-shell-scripting)
+* [tutorials point](https://www.tutorialspoint.com/unix/index.htm)
+* [Unix tutorial for beginners](http://www.ee.surrey.ac.uk/Teaching/Unix/)
+
+After you complete one or two of above, maybe you want to move to this advanced course on Bash-Scripting Guide:
+* [Advanced Bash-Scripting Guide](https://tldp.org/LDP/abs/html/index.html)
 
 A **shell** is a powerful user interface for UNIX-like operating system. It can interpret commands, and run other programs.
 
