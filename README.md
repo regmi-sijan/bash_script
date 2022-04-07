@@ -578,3 +578,7 @@ This will create the output.txt file that contains the filtered data.
 ### Search Pattern
 Most of the time we need searching certain patterns through the text. To do that awk also supports the **regular expressions** to create such patterns.
 
+
+## Common awk work we do:
+- To first list the files in the directory `ls -ltr` // more detailed view with size also shown
+- Now we do selection of output based on file sizes greater than some value we are interested in: `$ ls -ltr | awk '$5 > 4000'`
