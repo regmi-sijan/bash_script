@@ -444,3 +444,135 @@ Then, `$ crontab -l` to confirm that the job has been put into the schedule.
 ## Remove the current crontab:
 The `-r` option `$ crontab -r` causes the current crontab to be removed. Be cautious doing this as it removes your entire scheduled crontab jobs.
 
+
+# Text-Parsing (AWK)
+**Important to remember is that there are text-parsing tools that you can use for your needs to search/filter/ out the required patterns for your programming needs** -> just be aware of this
+In simple terms, it is a common programming task that separates the given series of text into smaller components based on some rules. We could use various programming laguages to accomplish the text-parsing like using python's Regular Expressions, Tokenization; perl scripts; or **awk** for UNIX-like system doing readily from the command-lines. With awk we can process large size data texts because, instead of loading the entire text into memory, we're reading it sequentially in chunks. AWK is a pattern matching programming language.
+
+Awk main syntax:
+```bash
+awk [ -F fs] [ -v var=value ]  [ 'prog' | -f progfile  ] [ file ...]
+```
+Like:
+```bash
+awk 'length($0) < 100' input.txt
+```
+Note here that we need to **enclose our inline program in quotes**. This one lines program is okay, but many times we will have multiple lines in our program, and this method won't be efficient. So we need to make the script file. Let's see how to run one of these awk script files that contains the programming part inside.
+```bash
+awk -f comments.awk input.txt
+```
+Here, scripts (program statements) are in comments.awk file.
+
+action statements and conditions go like this: `condition {action}`. Like: `length($0) < 100 { print }`. This means print if the total charachters are less than 100. But here we are missing the head title of the text and also the total comments in the text file. So we use BEGIN and END patterns which are executed only once. BEGIN is used before receiving any input and END after processing all input. In this way, they can be used to perform startup and cleanup actions in your AWK programs. Although, it is not absolutely required to use BEGIN and END in you awk program, but it is considered a good practice to do so. You could even include multiple BEGIN and END blocks in your program. So, let's extend the previous awk commands to accomodate this new requirements:
+```
+BEGIN { 
+        print "User Feedback (Only Short Comments)" 
+}
+length($0 < 100) { count++; print $0 }
+END { 
+        print "Percentage of Short Comments: ", (count/NR)*100, "%" 
+}
+```
+Let's interpret above statements: count variable is not initialized because awk uses default value 0 for the variables. We used built-in **NR** variable, that gives us the number of lines that we've read so far. Also, inside the action block {}, to execute separate statements either we need to put them in the separate lines or separate them with semi-colon ";" as above.
+
+**Field variables are formed by using $ prefix before any field index**
+- $0 indicates all the columns available
+- $1 indicates the first column
+- $2 second column
+- ...
+- $(NF-1)  indicates the second to last column
+- $NF      indicates the last column
+
+Awk can do simple maths as well. Let's see one such example:
+```bash
+awk '{print $1"*"$1,"=",$1*$1}' a.txt
+```
+shows:
+```
+1*1 = 1
+2*2 = 4
+3*3 = 9
+4*4 = 16
+```
+given `a.txt` has 1,..4 in a separate line.
+
+### Hello World! - command line
+When an AWK program contains the `BEGIN` pattern without another special pattern, AWK will not expect any further command line input and exit.
+```bash
+awk 'BEGIN { print  "Hello World!"  }'
+```
+Now let's make helloworld.awk file with the same contents as above and execute the it as `awk -f helloworld.awk`.
+
+## Getting Started with `awk`, a powerful text-parsing tool
+Awk is a text-parsing tool for UNIX-like systems, it can also be called a programming language on its own because it contains the functions ability.
+
+We work on this data file: colors.txt
+```
+name       color  amount
+apple      red    4
+banana     yellow 6
+strawberry red    3
+grape      purple 10
+apple      green  8
+plum       purple 2
+kiwi       brown  4
+potato     brown  9
+pineapple  yellow 5
+```
+
+Awk's basic syntax:
+```bash
+awk [option] 'pattern {action}' file
+```
+### printing a column
+In awk, the `print` function dsiplays whatever you specify. There are many predefined variables you can use, but some of the most common are integers designating the columns in a text file.
+```bash
+$ awk '{print $2}' colors.tx                    // colors.txt is the file location
+```
+$2 denotes the second column. `print $0` will print all the columns.
+
+### Conditional selection of the columns
+For example the following will look into the col2 and see if it has yellow matching and prints all the col1 contents for it.
+```bash
+awk '$2=="yellow"{print $1}' colors.txt
+// shows 
+banana
+pineapple
+```
+The following ones looks in $2 for apporximate matches of the letter p followed by any number (one or more) characters and followed by letter p again and then print all the columns denoted by $0.
+```bash
+awk '$2 ~ /p.+p/ {print $0}' colors.txt
+```
+To print with condition that the third column containing an integer greater than 5, but print only from both col1 and col2
+```bash
+awk '$3>5 {print $1, $2}' colors.txt
+```
+### Field Separator ( comma, whitespace, etc)
+Let's see how awk separates comma separated file. By default, awk uses whitespace as the field separator, though. So, to check let's first create **colors.csv** file now as:
+```
+name,color,amount
+apple,red,4
+banana,yellow,6
+strawberry,red,3
+grape,purple,10
+apple,green,8
+plum,purple,2
+kiwi,brown,4
+potato,brown,9
+pineapple,yellow,5
+```
+awk can treat the data in exactly same way, as long as you specify which character it should use as the field separator in your command. So, use `-F` option to define the delimiter.
+```bash
+awk -F"," '$2=="yellow" {print $1}' colors.csv
+```
+
+### Saving output
+Using output redirection operator, we can easily save the output of our search and filters. Like:
+```bash
+awk -F"," '$2=="yellow" {print $1}' colors.csv > output.txt
+```
+This will create the output.txt file that contains the filtered data.
+
+### Search Pattern
+Most of the time we need searching certain patterns through the text. To do that awk also supports the **regular expressions** to create such patterns.
+
