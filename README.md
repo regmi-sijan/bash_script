@@ -446,7 +446,9 @@ The `-r` option `$ crontab -r` causes the current crontab to be removed. Be caut
 
 
 # Text-Parsing (AWK)
-**Important to remember is that there are text-parsing tools that you can use for your needs to search/filter/ out the required patterns for your programming needs** -> just be aware of this
+>**Important to remember is that there are text-parsing tools that you can use for your needs to search/filter/ out the required patterns for your programming needs** -> just be aware of this
+
+
 In simple terms, it is a common programming task that separates the given series of text into smaller components based on some rules. We could use various programming laguages to accomplish the text-parsing like using python's Regular Expressions, Tokenization; perl scripts; or **awk** for UNIX-like system doing readily from the command-lines. With awk we can process large size data texts because, instead of loading the entire text into memory, we're reading it sequentially in chunks. AWK is a pattern matching programming language.
 
 Awk main syntax:
