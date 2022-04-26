@@ -580,5 +580,9 @@ Most of the time we need searching certain patterns through the text. To do that
 
 
 ## Common awk work we do:
-- To first list the files in the directory `ls -ltr` // more detailed view with size also shown
-- Now we do selection of output based on file sizes greater than some value we are interested in: `$ ls -ltr | awk '$5 > 4000'`
+1. How to filter the list of files greater than some sizes using `ls` and `awk`?
+    - To first list the files in the directory `ls -ltr` // more detailed view with size also shown
+    - Now we do selection of output based on file sizes greater than some value we are interested in: `$ ls -ltr | awk '$5 > 4000'`
+2. How to cp the filtered list of files from above command using `ls, awk, cp`?
+    - Make the script file that does filtering and cp commands as well. `ls -ltr /source_dir/ | awk '$5>1000 {print "cp " $9 "/target_dir/"}' > script_file.sh`
+    - Then, just run you script by first making it scriptable as; `chmod +x script_file.sh` and `./script_file.sh`.
