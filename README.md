@@ -586,3 +586,48 @@ Most of the time we need searching certain patterns through the text. To do that
 2. How to cp the filtered list of files from above command using `ls, awk, cp`?
     - Make the script file that does filtering and cp commands as well. `ls -ltr /source_dir/ | awk '$5>1000 {print "cp " $9 "/target_dir/"}' > script_file.sh`
     - Then, just run you script by first making it scriptable as; `chmod +x script_file.sh` and `./script_file.sh`.
+
+
+## xargs
+It is a command line command, it take output of a command and passes it as argument of another command. If no command is specified, xargs executes echo by default. Because many commands like echo, rm, mkdir don't accpet the standard input as agruments, using xargs we can force them to do it.
+
+**xargs** reads items from the standard input, delimited by blanks and executes the command one or more times with any initial-arguments followed by items read from standard input.
+
+Do you need to string some linux commands together, but one (mkdir, rm, etc.) of them doesn't accept the piped input? `xargs` can take the output from one command and send it to another command as parameters (or arguments).
+```
+// to output all the output from previous command into single line
+$ ls -ltr | xargs       // default echo command is exectued
+
+// to make the folders using mkdir
+$ echo 'one two three' | xargs mkdir        // giving mkdir inputs from previous output
+$ ls
+one two three
+
+// to wc the multiple files as once
+$ ls -ltr | xargs wc
+
+// to create a multiple files
+$ echo 'one two three' | xargs -p touch      // -p option lets to confirm before final execution
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
