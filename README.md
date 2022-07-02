@@ -612,7 +612,15 @@ $ echo 'one two three' | xargs -p touch      // -p option lets to confirm before
 
 ```
 
+# The AWK Programming Language: Tutorials
 
+[Book](http://ia803404.us.archive.org/0/items/pdfy-MgN0H1joIoDVoIC7/The_AWK_Programming_Language.pdf)
+
+Suppose you have a file name **file.txt** that contains the data like name, pay rate, and hours worked. Now you want to see name, and total to pay. i.e you have this: Beth,4.00,0 - one entry. Then you want to do:
+```
+awk '$3>0 {print $1, $2*$3}' file.txt
+```
+The part inside the quote is a complete program. Practice more from this book!! Good luck
 
 
 
