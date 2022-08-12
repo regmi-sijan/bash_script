@@ -586,6 +586,14 @@ Most of the time we need searching certain patterns through the text. To do that
 2. How to cp the filtered list of files from above command using `ls, awk, cp`?
     - Make the script file that does filtering and cp commands as well. `ls -ltr /source_dir/ | awk '$5>1000 {print "cp " $9 "/target_dir/"}' > script_file.sh`
     - Then, just run you script by first making it scriptable as; `chmod +x script_file.sh` and `./script_file.sh`.
+3. Justin Frantz email: First filter the condor area using your size file and only your required files and save it in text file and just split this large file into xaa, xab, etc
+```
+ls -ltr /sphenix/user/jfrantz/caloCalib/framew/condor/v14/*piemc.root | awk '$5 > 1866885 {print $9}  '>> listAll.txt
+        // v14 have other several similar folder v14b, v14c, v14d. So run above code 3 more time (total 4 times) to include all v14* folders
+        // this will create one giant "listAll.txt" file which already contains the path location of the files I need
+split -l 5000 listAll.txt               // will split the big file into small chunks named like xaa, xab, xac, ...
+
+```
 
 
 ## xargs
