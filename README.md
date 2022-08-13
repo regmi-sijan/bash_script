@@ -579,6 +579,10 @@ This will create the output.txt file that contains the filtered data.
 Most of the time we need searching certain patterns through the text. To do that awk also supports the **regular expressions** to create such patterns.
 
 
+
+
+
+
 ## Common awk work we do:
 1. How to filter the list of files greater than some sizes using `ls` and `awk`?
     - To first list the files in the directory `ls -ltr` // more detailed view with size also shown
@@ -594,6 +598,16 @@ ls -ltr /sphenix/user/jfrantz/caloCalib/framew/condor/v14/*piemc.root | awk '$5 
 split -l 5000 listAll.txt               // will split the big file into small chunks named like xaa, xab, xac, ...
 
 ```
+The above method I did is fine, but it is still taking some time for doing the first step, so JF has some faster method to share:
+```
+ls -ltr /sphenix/user/jfrantz/caloCalib/framew/condor/v14/ > allall_ls_ltr_out.txt
+cat allall_ls_ltr_out.txt | grep piemc > all_piemc_ls_ltr_out.txt
+cat all_piemc_ls_ltr_out.txt | awk '$5 > 1888667 {print "/sphenix/user/jfrantz/caloCalib/framew/condor/v14/"$9}' > listAll.txt
+```
+
+
+
+
 
 
 ## xargs
@@ -629,6 +643,82 @@ Suppose you have a file name **file.txt** that contains the data like name, pay 
 awk '$3>0 {print $1, $2*$3}' file.txt
 ```
 The part inside the quote is a complete program. Practice more from this book!! Good luck
+
+
+
+
+
+
+
+
+
+
+
+# Examples: Explained the real example that is useful:
+## grep:
+1. How to ignore some words doing search using grep?
+```
+grep Exception logFile.txt | grep -v ERROR
+```
+above we first search inside logFile.txt the lines that matches the word Exception, but then with these lines we want to search only those lines that don't includes ERROR word in it, the `-v` option is really doing ignoring the pattern we say (ERROR) word.
+
+2. How to count the occurrence of a word in a file using the grep?
+```
+grep -c "Error" logFile.txt             // here we want the count of word Error inside the logFile.txt
+```
+3. How to use egrep to search the pattern?
+egrep is more powerful version of regular grep, as it has more functionality that helps to do more or regular expressions
+```
+egrep 'Error|Exception' logFile.txt 
+```
+We can use `|` option to search for either Error or Exception by executing just one command
+
+4. How to do case-insensitive searching using grep?
+```
+grep -i error logFilet.txt
+```
+Can search any match like Error, ERROR, ERRor, etc.
+
+5. How to do a recursive search in a directory using grep?
+```
+grep -R store *
+```
+searching current dir and all its subdirectory either a file or folder name "store"
+
+6. How to display files names which contain given word?
+```
+grep -l ERROR *.log
+```
+searching files that has ERROR in it within all log files in the current directory
+
+7. How to display the lines numbers that match the pattern using grep in the file?
+```
+grep -n ERROR logFile.txt
+```
+shows in which line "ERROR" occurred in the logFile.txt
+
+8. How to search the whole word in a file using grep?
+Sometimes you just want to search instances where the word is alone without inside some mixture.
+```
+grep -w ERROR logFile.txt
+```
+searches all instances of 'ERROR' but not search in 'sysERROR'.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
