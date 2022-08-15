@@ -603,6 +603,9 @@ The above method I did is fine, but it is still taking some time for doing the f
 ls -ltr /sphenix/user/jfrantz/caloCalib/framew/condor/v14/ > allall_ls_ltr_out.txt
 cat allall_ls_ltr_out.txt | grep piemc > all_piemc_ls_ltr_out.txt
 cat all_piemc_ls_ltr_out.txt | awk '$5 > 1888667 {print "/sphenix/user/jfrantz/caloCalib/framew/condor/v14/"$9}' > listAll.txt
+
+// combining 
+cat allall_ls...txt | grep piemc | awk '$5 > .....
 ```
 
 
