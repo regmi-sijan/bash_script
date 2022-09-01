@@ -1,7 +1,43 @@
 # UNIX/LINUX commands and Bash Scripting
 
 Note: These notes are collected, compiled from different sources for my future references.
-### Reference List
+
+## :sunflower: Table of Contents :sunflower:
+
+- [Reference List](#reference-list)
+- [Starting with some basics](#starting-with-some-basics)
+- [Working with files](#working-with-files)
+- [Displaying contents of file on the screen](#displaying-contents-of-file-on-the-screen)
+- [Searching the contents of the file](#searching-the-contents-of-the-file)
+- [Compression and archiving](#compression-and-archiving)
+- [Networking](#networking)
+- [tar](#tar)
+- [zip](#zip)
+- [Permissions/ Chaning access rights](#permissions-chaning-access-rights)
+- [Processes and Jobs](#processes-and-jobs)
+- [wc](#wc)
+- [Networking](#networking)
+- [Script](#script)
+  - [Shell script](#shell-script)
+  - [Pipes and Filters](#pipes-and-filters)
+  - [Shell variables](#shell-variables)
+  - [Environment Variables](#environment-variables)
+  - [Some useful features of the Bash shell](#some-useful-features-of-the-bash-shell)
+  - [Command Substitution](#command-substitution)
+  - [Batch mode vs. Concurrent mode](#batch-mode-vs-concurrent-mode)
+- [Bash Scripting Advanced](#bash-scripting-advanced)
+- [Scheduling jobs using Cron](#scheduling-jobs-using-cron)
+- [Text-Parsing (AWK)](#text-parsing-awk)
+- [Getting Started with awk, a powerful text-parsing tool](#getting-started-with-awk-a-powerful-text-parsing-tool)
+- [Common awk work we do:](#common-awk-work-we-do)
+- [xargs](#xargs)
+- [The AWK Programming Language: Tutorials](#the-awk-programming-language-tutorials)
+- [Examples: Explained the real example that is useful](#examples-explained-the-real-example-that-is-useful)
+
+
+
+## Reference List
+
 * [Coursera IBM Course](https://www.coursera.org/learn/hands-on-introduction-to-linux-commands-and-shell-scripting)
 * [tutorials point](https://www.tutorialspoint.com/unix/index.htm)
 * [Unix tutorial for beginners](http://www.ee.surrey.ac.uk/Teaching/Unix/)
@@ -11,7 +47,8 @@ After you complete one or two of above, maybe you want to move to this advanced 
 
 A **shell** is a powerful user interface for UNIX-like operating system. It can interpret commands, and run other programs.
 
-## Starting with some basics:
+## Starting with some basics
+
 ```
 $ pwd                   // tells you the current working directory with the complete path to reach from root dir
 $ ls                    // lists files and directories in your current dir
