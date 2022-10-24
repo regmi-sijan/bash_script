@@ -29,7 +29,6 @@ Note: These notes are collected, compiled from different sources for my future r
 - [Scheduling jobs using Cron](#scheduling-jobs-using-cron)
 - [Text-Parsing (AWK)](#text-parsing-awk)
 - [Getting Started with awk, a powerful text-parsing tool](#getting-started-with-awk-a-powerful-text-parsing-tool)
-- [Common awk work we do:](#common-awk-work-we-do)
 - [xargs](#xargs)
 - [The AWK Programming Language: Tutorials](#the-awk-programming-language-tutorials)
 - [Examples: Explained the real example that is useful](#examples-explained-the-real-example-that-is-useful)
@@ -614,39 +613,6 @@ This will create the output.txt file that contains the filtered data.
 
 ### Search Pattern
 Most of the time we need searching certain patterns through the text. To do that awk also supports the **regular expressions** to create such patterns.
-
-
-
-
-
-
-## Common awk work we do:
-1. How to filter the list of files greater than some sizes using `ls` and `awk`?
-    - To first list the files in the directory `ls -ltr` // more detailed view with size also shown
-    - Now we do selection of output based on file sizes greater than some value we are interested in: `$ ls -ltr | awk '$5 > 4000'`
-2. How to cp the filtered list of files from above command using `ls, awk, cp`?
-    - Make the script file that does filtering and cp commands as well. `ls -ltr /source_dir/ | awk '$5>1000 {print "cp " $9 "/target_dir/"}' > script_file.sh`
-    - Then, just run you script by first making it scriptable as; `chmod +x script_file.sh` and `./script_file.sh`.
-3. Justin Frantz email: First filter the condor area using your size file and only your required files and save it in text file and just split this large file into xaa, xab, etc
-```
-ls -ltr /sphenix/user/jfrantz/caloCalib/framew/condor/v14/*piemc.root | awk '$5 > 1866885 {print $9}  '>> listAll.txt
-        // v14 have other several similar folder v14b, v14c, v14d. So run above code 3 more time (total 4 times) to include all v14* folders
-        // this will create one giant "listAll.txt" file which already contains the path location of the files I need
-split -l 5000 listAll.txt               // will split the big file into small chunks named like xaa, xab, xac, ...
-
-```
-The above method I did is fine, but it is still taking some time for doing the first step, so JF has some faster method to share:
-```
-ls -ltr /sphenix/user/jfrantz/caloCalib/framew/condor/v14/ > allall_ls_ltr_out.txt
-cat allall_ls_ltr_out.txt | grep piemc > all_piemc_ls_ltr_out.txt
-cat all_piemc_ls_ltr_out.txt | awk '$5 > 1888667 {print "/sphenix/user/jfrantz/caloCalib/framew/condor/v14/"$9}' > listAll.txt
-
-// combining 
-cat allall_ls...txt | grep piemc | awk '$5 > .....
-```
-
-
-
 
 
 
