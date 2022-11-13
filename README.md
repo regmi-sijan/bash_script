@@ -5,6 +5,10 @@ Note: These notes are collected, compiled from different sources for my future r
 ## :sunflower: Table of Contents :sunflower:
 
 - [Reference List](#reference-list)
+- :blue_book: [More Resources](#more-resources)
+
+<hr>
+
 - [Starting with some basics](#starting-with-some-basics)
 - [Working with files](#working-with-files)
 - [Displaying contents of file on the screen](#displaying-contents-of-file-on-the-screen)
@@ -32,6 +36,7 @@ Note: These notes are collected, compiled from different sources for my future r
 - [xargs](#xargs)
 - [The AWK Programming Language: Tutorials](#the-awk-programming-language-tutorials)
 - [Examples: Explained the real example that is useful](#examples-explained-the-real-example-that-is-useful)
+
 
 
 
@@ -712,7 +717,11 @@ searches all instances of 'ERROR' but not search in 'sysERROR'.
 
 
 
+# More Resources
 
+While my compiled notes from above is already thorough, it is by no means complete, and neither will be any of the below. However, having many people way of presenting the same topics will give us more proper knowledge. So, here are the lists of more refernces:
+
+- [the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line)
 
 
 
