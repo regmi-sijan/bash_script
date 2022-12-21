@@ -402,7 +402,9 @@ $ GREETINGS="HELLO"            // we normally do all caps for the variables, and
 $ echo $GREETINGS       // to see the value of this variable, we put $ sign infront of it
 ```
 
+```
 **$ unset var_name**  // deletes var_name `$ unset GREETINGS`, then no longer now available
+```
 
 ## Environment Variables
 They are all CAPITAL letters. It has extended scope. There are number of default environment variables, but you can also upgrade shell variables into the environment variables using **export**. Like **export var_name**.
@@ -416,7 +418,7 @@ $ printenv | grep "GREE"     // env will list all, grep GREE will list only thos
 ```
 
 ## Some useful features of the Bash shell
-### Metacharacters
+## Metacharacters
 ```
  #                              // precedes a comment
  ;                              // command separator `$ echo "Hello"; whoami` will exectue both commands one after another
@@ -459,6 +461,73 @@ $ echo $here            // indeed here variable created with the value of pwd
 **Concurrent Mode**: commands run in parallel   `$ command1 & command2`  // & puts command1 in background and runs command2 in foreground and running
 
 # Bash Scripting Advanced
+Bash is a shell, a program that let's interact with system. Bash is more popular system, available to many platforms.
+
+## Using Bash:
+```bash
+$ bash --version    # to show which version installed
+$ echo $SHELL       # to check if bash is currently active
+
+# pipe and re-direction
+$ cat longFile.txt | less                # pipe output to less, so you can see page by page
+$ cat longFile.txt | wc                  # to count line, words, characters using wc
+$ ls > list.txt                          # sends all the output to list.txt, replacing old contents
+$ ls >> list.txt                         # instead for replacing, we could append
+$ find / -name "Linux" >output 2> error  # send good output to output, errors to error file
+    # 2> is needed here 2 to tell that we want to re-direct the error
+$ cat < file.txt             # input re-direction to give input from file to cat command
+    # note the < where it is pointing and how the output is flowing.
+
+# bash built-ins, or command
+$ echo Hello There   # echo is built-in, it ends with newline, nice thing!
+$ command echo hello # to run command echo version
+$ builtin echo hello # built-in version
+$ command -V df
+    df is /usr/bin/df   # this means it is built-in
+$ help       # to list all built-ins
+$ help echo  # to see more about echo built-in
+
+# Bash expansion and substitution
+$ echo ~     # shows your home directory, tilde expansion
+$ echo /tmp/{one,two,three}/file.txt    # creates one,two,three i.e. specified folders
+$ echo c{a,o,u}t                    # again uses specified character in between
+$ echo {1..100}                     # shows 1 to 100 like a range based expansion
+$ echo {1..100..2}                  # expansion but with step of 2
+$ echo {100..1}                     # reverse order
+$ echo {01..100}                    # keeps the padding same: 001, 002, 003, ... ,099, 100
+$ echo {a..z}
+$ echo {Z..A}
+$ echo {a..z..2}
+$ touch file_{01..12}{a..d}.txt     # creating some pattern/sequential type files instantly
+$ echo {cat,dog,fox}_{1..5}
+# parameter expansion
+$ a="Hello World"
+$ echo $a          # this is a parameter expansion
+$ echo ${a//e/_}   # readin variable, search e, replace with _
+$ echo ${a:6}      # print after 6th and after characters
+$ echo ${a:6:3}    # after 6th, just print 3 characters
+# command substitution
+$ uname -r                            # to see release verion of the kernel
+$ echo "The kernel is $(uname -r)."
+$ echo "The Python version is $(python -V)." # see how we used ()  parenthesis
+# arithmetic expansion
+$ $(())     # two parenthesis
+$ echo $((2+2))  # shows 4
+$ echo $((4-2))  # 2
+$ echo $((4*2))  # 8
+$ echo $((4/5))  # 0, bash only does integer work
+$ echo $((5%4))  # 1, modulo % gives remainder
+```
+
+## Programming with Bash
+Next time
+
+
+
+
+
+
+
 ## command pipeline:
 It is a feature of the shell, that helps us to combine different unrelated commands in such a way that one commands output is sent directly as input to the next command. This way, what is not possilbe with a single command can be made possible by connecting multiple commands.
 
