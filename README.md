@@ -21,14 +21,7 @@ Note: These notes are collected, compiled from different sources for my future r
 - [Processes and Jobs](#processes-and-jobs)
 - [wc](#wc)
 - [Networking](#networking)
-- [Script](#script)
-  - [Shell script](#shell-script)
-  - [Pipes and Filters](#pipes-and-filters)
-  - [Shell variables](#shell-variables)
-  - [Environment Variables](#environment-variables)
-  - [Some useful features of the Bash shell](#some-useful-features-of-the-bash-shell)
-  - [Command Substitution](#command-substitution)
-  - [Batch mode vs. Concurrent mode](#batch-mode-vs-concurrent-mode)
+- [Command Line](#command-line)
 - [Bash Scripting Advanced](#bash-scripting-advanced)
 - [Scheduling jobs using Cron](#scheduling-jobs-using-cron)
 - [Text-Parsing (AWK)](#text-parsing-awk)
@@ -261,6 +254,109 @@ curl- o https://..../*.txt
 To view permission of dir-name
 ```
 ls -ld dir_name
+```
+
+## Command line
+```bash
+## System Basics:
+#---------------------------------------------------------------------------
+$ echo $PATH          # displays what PATH environment variable is pointing to
+$ which ls            # shows the path of the file where this command lives
+$ sudo locate *.h     # locates the file path for all .h files
+$ find *.sh           # finds the file
+$ find / -name *.sh   # finds inside / root folder
+$ grep text_to_search file(s)  # search text in file(s), and returns those lines from all files
+    # let's see other various options
+    $ grep -c   # print count of matching line rather than returning those lines
+    $ grep -h   # not print all the files if found in many files
+    $ grep -i   # ignore case
+    $ grep -l   # print name of files that matches
+    $ grep -n   # print line number of match
+    $ grep -v   # invert the match i.e. opposite of what we search
+$ ls /path/to/list    # lists the file and folders
+$ ls -ltr <dir>       # more information while listings
+$ ls \                # waits for command next line, backslash is used for command continuation
+> /                   # like doing: $ ls /
+$ apropos copy        # to see if any commands that does similar thing is available
+                      # apropos helps to find commands we might need
+$ man cp              # after you found the command that might be useful
+                      # learn more about it using man command to see it's manual page
+$ cat /etc/*release   # shows about the system installed
+$ hostnamectl         # more system info.
+$ uname -a            # similar as above info.
+$ uptime              # shows how long this system has been booted
+$ df -h               # shows how much disk available in human-readable format
+$ free                # shows the memory usage
+$ top                 # to see which app is using cpus
+
+$ echo h{a,e,i,o,u}llo  # prints all possibility
+$ echo h{a..z}llo       # range from a-z
+$ echo h{z..a}llo       # reverse range from z to a
+$ echo h{0..10}llo      # range of numbers as well
+$ echo {0..100..2}      # 0 through 100 interval 2
+
+$ echo "It is " $(date) "today."  # $(date) gives todays datetime
+$ history                         # to show bash command history
+$ !55                             # runs the 55th command in your command history
+
+$ pwd                              # prints current working directory
+$ ls <dir>
+$ cd <dir>                         # change to <dir> directory
+$ cp <source> <destination>        # copies source into destination
+$ mv <source> <destination>        # two-jobs: 1. rename source to dest, 2. moves also
+$ rm -rf <dir/files>               # very powerful delete of any files or directories
+$ mkdir <dir_name>                 # creates directory
+
+# data manipulation:
+$ cat file.txt                     # to view the file
+$ less file.txt                    # better way to view the file
+$ touch file.txt                   # creates (if not present), else updates timestamp of the file
+$ head -n 5 file.csv                 # can view first 5 lines in csv file
+$ tail -n 5 file.csv                 # can view last 5 lines in csv file
+$ cut -f 2-5, 8 -d , file.csv        # select column from csv file, col 2-5, and 8 with delimeter ,
+
+# Combining tools
+$ head -n 5 file.csv > file_five_rows.csv    # send the output of one command to another
+        # > command works for every shell command that produces output
+$ head -n 5 file.csv | tail -n 3      # pipe or chain commands together
+        # pipe symbol tells the shell to use the output of the command on the left
+        # as the input to the command on the right
+$ cut -d , -f 1 file.csv | grep -v Date | head -n 10    # chaining commands
+$ wc file.txt    # prints the count of number of characters, words, and lines in a file
+    # -c, -w, -l options prints only the respective numbers
+$ cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort | uniq -c  # see how sort and uniq is added here
+$ ctrl + c    # to stop running a program
+$ ctrl + z    # send the process into background
+
+# Batch Processings:
+$ echo $HOME  # /home/shyam
+    # other environment variables are: PWD, SHELL, USER, and so many
+    # env. variables are written in UPPERCASE as standard
+    # these variables are available all the time
+$ set | less       # to list all of them and see one page at a time
+$ printenv | less  # same as above
+
+# Bash output redirection
+$ echo {a..z}{a..z}{0..9} | set     # shows combination of all possible 3 characters
+$ echo {a..z}{a..z}{0..9} > output  # instead of printing sends to the file output
+    # note with > redirection, everything will be wiped and put new thing in output
+    # instead if you want to append, you can do >>
+$ echo {a..z}{a..z}{0..9} >> output
+$ wc < output         # re-direction from file to the wc command
+    # notice the < direction of pointing
+# 0 is stdin, 1 is stdout, 2 is for stderror
+$ find / -name "linux" > out 2> error     # success will go to out, permission denied goes to error
+
+# bash expansion and substituion
+$ touch file_{1..100}.txt       # quickly create 100 files with expansion
+$ echo {1..100..3}              # every 3rd items from 1 to 100
+$ mkdir -p stuff/{a..z}/{1..100}{z..a}  # creates giant web/tree of folders with one command
+
+# bash aliases
+# use alias keyword to create alias
+$ alias ll='ls -ltrh'    # for nicer long listings
+$ alias ll   # to see what command it's set up to
+$ unalias ll # after you are done with it, to remove it
 ```
 
 # Script
