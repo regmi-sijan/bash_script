@@ -520,7 +520,116 @@ $ echo $((5%4))  # 1, modulo % gives remainder
 ```
 
 ## Programming with Bash
-Next time
+To do work that needs repetitive task, it is desirable to put them in a file, so it will be less error prone, and also faster to do. **One-liners** are one-line small bash command to try if that works for you. They are usually many commands presented in a one line connecting them with a pipe symbol or commands are separated by semi-colon. Can be very long (even wrap), but there's no newline until the end. And, these one-liners are often kept in saved docs so whenever they need it they can use it faster no need to re-write again and again.
+
+To write bash script, first write the shebang line (to tell which program to run this script, can be any like python, perl, etc.). Shebang has to be the first line, and we can't even write comment in the first line. Let's make `myscript.sh` script that does very simple "hello there" output in the terminal.
+```bash
+#!/usr/bin/env bash
+echo "hello"
+
+# this is a comment
+echo "there"
+```
+**echo** command is the most used command and used for displaying things in the terminal or directed elsewhere. Let's see some usage of echo command.
+```bash
+$ echo hello
+>> hello
+$ echo hello world
+>> hello world
+$ worldsize=big   # defining a variable
+$ echo hello $worldsize world
+>> hello big world
+$ echo "The kernel is $(uname -r)."   # double quote is better
+>> The kernel is <shows_your_kernel>.
+$ echo -n   # gives no newline, needs sometime
+```
+
+**variables** allows us to store and retrieve values by name. Bash variables are special case of parameter substitution. Variables are named with alphanumeric characters. There should be **no spaces** on either side of the equal sign. Variable names are case-sensitive. Many times we use lowercase names for variables like: `mygreeting=Hello`. Uppercase is good to put for the environment and system variables.
+```bash
+$ mygreeting=Hello
+$ mygreeting2="Good Morning!"
+$ number=16
+$ echo $mygreeting
+>> Hello
+$ declare -r myName="Shyam Chauhan"   # it won't let change the value of var later
+$ echo $myName
+>> Shyam Chauhan
+```
+
+**Working with Numbers** we can do arithmetic expansion that returns the result of mathematical operations `$((...))` or arithmetic evaluation performs calculations and changes the value of variable `((...))`. Bash supports six different airthmetic operations `+, -, *, /, %, **` as addition, subtraction, multiplication, division, modulo, exponentiation respectively. Note only does integer division (No float in Bash).
+```bash
+$ echo $((4+4))
+>> 8
+$ echo $((8-5))
+>> 3
+$ echo $((2*3))
+>> 6
+$ echo $((8/4))
+>> 2
+$ echo $(( (3+6)-5*(5*2) ))
+>> -41
+$ a=3
+$ ((a+=3))
+$ echo $a
+>> 6
+$ ((a++))  # also has ((a--))
+$ echo $a
+>> 7
+$ declare -i b=3   # to make b as int always
+$ echo $b
+>> 3
+$ b=$b+4
+$ echo $b
+>> 7
+
+# to get random numbers
+$ echo $RANDOM
+$ echo $(( 1 + RANDOM % 10 ))    # can be thought as random bet 1 and 10
+```
+To do more precise calculations, we need to use `bc` or `awk`.
+```bash
+$ declare -i c=1
+$ declare -i d=3
+$ e=$(echo "scale=3; $c/$d"|bc)  # still just character and strings no number
+$ echo $e
+>> .333
+```
+
+**To Compare/Test things**:
+```bash
+# these are all single bracket notation, later we also see double bracket notation.
+$ [ -d ~ ]   # to test if home is a directory
+             # nothing returns means success
+$ echo $?    # shows what was the output of last command, which is 0
+$ [ -d /bin/bash ]; echo $?  # its a file, not dir
+>> 1    # 0 is exit success, and 1 is exit failure
+$ help test | less    # to see what you can check compare test with test
+$ [ "cat"="dog" ]; echo $?   # not equal, exits 1
+>> 1
+$ [ 4 -lt 5 ]; echo $?   # true 0
+>> 0
+$ [ 4 -lt 3 ]; echo $?  # false 1
+>> 1
+$ [ ! 4 -lt 3 ]; echo $?  # not False -> True
+>> 0
+```
+Double brackets test;
+```bash
+# extended double bracket test gives previous feature + additional things
+# i.e. we can combine tests to make more logical
+$ [[ 4 -lt 3 ]]; echo $?  # false
+>> 1
+$ [[ -d ~ && -a /bin/bash ]]; echo $?  # if home is dir, if bash binary file exists
+>> 0
+$ [[ -d ~ && -a /bin/mash ]]; echo $?  # no such file mash in bin, False
+>> 1
+$ [[ -d ~ || -a /bin/mash ]]; echo $?  # OR operator however is True
+>> 0
+$ [[ -d ~ ]] && echo ~ is a directory  # since True, will see output
+$ [[ -d /bin/bash ]] && echo /bin/bash is a directory  # fails first part, no output
+$ true && echo "True"   # built-in 'true' and 'false' also exists.
+```
+
 
 
 
