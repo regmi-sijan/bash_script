@@ -630,6 +630,224 @@ $ [[ -d /bin/bash ]] && echo /bin/bash is a directory  # fails first part, no ou
 $ true && echo "True"   # built-in 'true' and 'false' also exists.
 ```
 
+**Formatting and Styling text output**: `echo -e` interprets escaped characters like \t, \n, \a, and other control character so that we can have nice formatting and colors output. For example if we want nice two columns and nice formatted version of it, we can do the following:
+```bash
+$ echo -e "Name\t\tNumber"; echo -e "Shyam\t\t1234"
+$ echo -e "This text\nbreaks over\nthree lines"
+```
+See below for the formatting with some colors:
+```bash
+#!/usr/bin/env bash
+
+ulinered="\033[4;31;40m"
+red="\033[31;40m"
+none="\033[0m"
+
+echo -e $ulinered"ERROR:"$none$red" Something went wrong."$none
+```
+
+**Formatting output with printf**: Outputs text using placeholders and formatting. See the difference:
+```bash
+$ echo "The results are: $(( 2 + 2 )) and $(( 3 / 1 ))"
+$ printf "The results are: %d and %d\n" $((2+2)) $((3/1))  # it uses placeholder like %d
+>> The results are: 4 and 3
+#    %d is for digit
+#    %s is for string
+```
+
+**Arrays in Bash** Lets us store related information together, bash supporst indexed and associative arrays.
+```bash
+# indexed array
+declare -a snacks=("apple" "banana" "orange")
+echo ${snacks[2]}  # its zero-based
+>> orange
+# add new element
+snacks[5]="grapes"  # 4th pos can be empty
+# append at the end
+snacks+=("mango")
+# to see all values in an array
+echo ${snacks[@]}
+# loop using for
+for i in {0..6}; do echo "$i: ${snacks[i]}"; done
+
+## assocative array: we can specify key and value to an array
+declare -A office
+office[city]="San Francisco"  # key-value pair
+office["building name"]="HQ West"
+# to access
+echo ${office["building name"]} is in ${office[city]}
+```
+
+**Control Statements with the "if" keyword**:
+* Allows us to control how script execution happens
+* Run specified code based on conditions
+syntax:
+```bash
+if ...
+then
+    ...
+else
+    ...
+fi
+```
+Let's see some examples use in script.
+```bash
+#!/usr/bin/env bash
+
+declare -i a=3    # -i makes in int type
+if [[ $a -gt 4 ]]
+then
+    echo "$a is greater than 4"
+elif [[ $a -gt 2 ]]
+then
+    echo "$a is greater than 2"
+else
+    echo "$a is not greater than 4"
+fi
+```
+
+**Working with "while" and "until" loops**:
+* while loops run as long as their condition is true
+* until loops run as long as their condition is false
+Syntax:
+```bash
+# while
+while ...
+do
+    ...
+done
+
+# until
+until ...
+do
+    ...
+done
+```
+Examples:
+```bash
+#!/bin/env bash
+
+echo "while loop"
+
+declare -i n=0
+while (( n<10 ))
+do
+    echo "n:$n"
+    ((n++))
+done
+
+echo -e "\n Until Loop"
+
+declare -i m=0
+until ((m==10))
+do
+    echo "m:$m"
+    ((m++))
+done
+```
+
+**for loops**:
+* For loops iterate through a list of items, running code once for each item
+Syntax:
+```bash
+for i in ...
+do
+    ...
+done
+```
+Example:
+```bash
+#!/usr/bin/env bash
+for i in 1 2 3
+do
+    echo $i
+done
+
+# another:
+for i in {1..100}
+do
+    echo $i
+done
+
+# C-style
+for ((i=1; i<=10; i++))
+do
+    echo $i
+done
+
+# iterate thru array
+#!/usr/bin/env bash
+
+declare -a fruits=("apple" "banana" "cherry")
+for i in ${fruits[@]}
+do
+    echo $i
+done
+
+# associative array
+declare -A arr
+arr["name"]="hari"
+arr["age"]="42"
+for i in "${!arr[@]}"
+do
+    echo $i: "${arr[$i]}"    # access key-value pair
+done
+
+# working with filenames
+for i in *    # everything in current dir
+do
+    echo "Found a file: $i"
+done
+
+for i in $(ls)  # output of ls feed here
+do
+    echo "Found a file: $i"
+done
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
