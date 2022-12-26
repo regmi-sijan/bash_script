@@ -8,6 +8,7 @@
 * [Learning Bash Scripting (LinkedIn)](https://www.linkedin.com/learning/learning-bash-scripting-17063287)
 * [Advanced Bash-Scripting Guide](https://tldp.org/LDP/abs/html/index.html)
 * [the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line)
+* [AWK textbook](http://ia803404.us.archive.org/0/items/pdfy-MgN0H1joIoDVoIC7/The_AWK_Programming_Language.pdf)
 
 A **shell** is a powerful user interface for UNIX-like operating system. It can interpret commands, and run other programs.
 
@@ -20,12 +21,10 @@ ls -a                 // -a option allows you to list even the hidden files and 
 mkdir <dir_name>      // makes the dir_name folder in current dir
 cd dir_name           // change your directory to this new dir_name folder
 cd ..                 // brings you one directory up (going backward in directory tree)
+cd -                  // toggles betweent the current and last directory you visited
 ```
 
-**Trick**:
-If you want to just skim around different directories without actually changing your directory, you can do so using `$ ls` command. You can just **ls** the directories you want to quickly peek into and sort of use **up and down** arrow keys to quickly move back and forth to previoulsy typed areas. I always use this method to go into the very deep of the directory root and when I see where I want to go, I finally do up key and **cd** into this directory.
-
-**cd -** is another tip to quckly move back and forth between the current directory and the last directory area you visited.
+**Tips**: If you want to just skim around different directories without actually changing your directory, you can do so using `ls` command. You can just `ls` the directories you want to quickly peek into and sort of use **up and down** arrow keys to quickly move back and forth to previoulsy visited areas. I always use this method to go into the very deep of the directory root and when I see where I want to go, I finally do up key and **cd** into this directory.
 
 ## Working with files
 ```bash
@@ -327,11 +326,11 @@ unalias ll # after you are done with it, to remove it
 ```
 
 # Bash Scripting
+Bash is a shell, a program that let's interact with system. Bash is more popular system, available to many platforms.
 * list of commands interpreted by a scripting language, scripting language are not compiled but interpreted during the run-time, so it is slower in running! but development of the code is faster
 * commands can be entered interactively or listed in a text file
 * used to automate processes
 
-## Shell script
 It is a executable text file with interpreter directive, aka **shebang** directive `#!interpreter [optional-args]`. Here, `interpreter` is a path to an executable program,
 `optional-arg` is s single argument string.
 
@@ -426,9 +425,6 @@ echo $here            // indeed here variable created with the value of pwd
 ## Batch mode vs. Concurrent mode
 **Batch Mode**: commands run sequentially     ` $ command1; command2`
 **Concurrent Mode**: commands run in parallel   `$ command1 & command2`  // & puts command1 in background and runs command2 in foreground and running
-
-# Bash Scripting Advanced
-Bash is a shell, a program that let's interact with system. Bash is more popular system, available to many platforms.
 
 ## Using Bash:
 ```bash
@@ -1018,7 +1014,8 @@ Then, `$ crontab -l` to confirm that the job has been put into the schedule.
 The `-r` option `$ crontab -r` causes the current crontab to be removed. Be cautious doing this as it removes your entire scheduled crontab jobs.
 
 
-# Text-Parsing (AWK)
+# The AWK Programming Language: Tutorials
+
 >**Important to remember is that there are text-parsing tools that you can use for your needs to search/filter/ out the required patterns for your programming needs** -> just be aware of this
 
 
@@ -1039,7 +1036,7 @@ awk -f comments.awk input.txt
 Here, scripts (program statements) are in comments.awk file.
 
 action statements and conditions go like this: `condition {action}`. Like: `length($0) < 100 { print }`. This means print if the total charachters are less than 100. But here we are missing the head title of the text and also the total comments in the text file. So we use BEGIN and END patterns which are executed only once. BEGIN is used before receiving any input and END after processing all input. In this way, they can be used to perform startup and cleanup actions in your AWK programs. Although, it is not absolutely required to use BEGIN and END in you awk program, but it is considered a good practice to do so. You could even include multiple BEGIN and END blocks in your program. So, let's extend the previous awk commands to accomodate this new requirements:
-```
+```bash
 BEGIN { 
         print "User Feedback (Only Short Comments)" 
 }
@@ -1175,10 +1172,6 @@ $ ls -ltr | xargs wc
 $ echo 'one two three' | xargs -p touch      // -p option lets to confirm before final execution
 ```
 
-# The AWK Programming Language: Tutorials
-
-[Book](http://ia803404.us.archive.org/0/items/pdfy-MgN0H1joIoDVoIC7/The_AWK_Programming_Language.pdf)
-
 Suppose you have a file name **file.txt** that contains the data like name, pay rate, and hours worked. Now you want to see name, and total to pay. i.e you have this: Beth,4.00,0 - one entry. Then you want to do:
 ```bash
 awk '$3>0 {print $1, $2*$3}' file.txt
@@ -1192,10 +1185,7 @@ The part inside the quote is a complete program. Practice more from this book!! 
 
 
 
-
-
-
-# Examples: Explained the real example that is useful:
+# Real-World Examples Usages:
 ## grep:
 1. How to ignore some words doing search using grep?
 ```
