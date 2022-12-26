@@ -1,58 +1,25 @@
 # UNIX/LINUX commands and Bash Scripting
 
-Note: These notes are collected, compiled from different sources for my future references.
-
-## :sunflower: Table of Contents :sunflower:
-
-- [Reference List](#reference-list)
-- :blue_book: [More Resources](#more-resources)
-
-<hr>
-
-- [Starting with some basics](#starting-with-some-basics)
-- [Working with files](#working-with-files)
-- [Displaying contents of file on the screen](#displaying-contents-of-file-on-the-screen)
-- [Searching the contents of the file](#searching-the-contents-of-the-file)
-- [Compression and archiving](#compression-and-archiving)
-- [Networking](#networking)
-- [tar](#tar)
-- [zip](#zip)
-- [Permissions/ Chaning access rights](#permissions-chaning-access-rights)
-- [Processes and Jobs](#processes-and-jobs)
-- [wc](#wc)
-- [Networking](#networking)
-- [Command Line](#command-line)
-- [Bash Scripting Advanced](#bash-scripting-advanced)
-- [Scheduling jobs using Cron](#scheduling-jobs-using-cron)
-- [Text-Parsing (AWK)](#text-parsing-awk)
-- [Getting Started with awk, a powerful text-parsing tool](#getting-started-with-awk-a-powerful-text-parsing-tool)
-- [xargs](#xargs)
-- [The AWK Programming Language: Tutorials](#the-awk-programming-language-tutorials)
-- [Examples: Explained the real example that is useful](#examples-explained-the-real-example-that-is-useful)
-
-
-
-
-## Reference List
+## Reference Lists :book:
 
 * [Coursera IBM Course](https://www.coursera.org/learn/hands-on-introduction-to-linux-commands-and-shell-scripting)
 * [tutorials point](https://www.tutorialspoint.com/unix/index.htm)
 * [Unix tutorial for beginners](http://www.ee.surrey.ac.uk/Teaching/Unix/)
-
-After you complete one or two of above, maybe you want to move to this advanced course on Bash-Scripting Guide:
+* [Learning Bash Scripting (LinkedIn)](https://www.linkedin.com/learning/learning-bash-scripting-17063287)
 * [Advanced Bash-Scripting Guide](https://tldp.org/LDP/abs/html/index.html)
+* [the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line)
 
 A **shell** is a powerful user interface for UNIX-like operating system. It can interpret commands, and run other programs.
 
 ## Starting with some basics
 
-```
-$ pwd                   // tells you the current working directory with the complete path to reach from root dir
-$ ls                    // lists files and directories in your current dir
-$ ls -a                 // -a option allows you to list even the hidden files and folder
-$ mkdir <dir_name>      // makes the dir_name folder in current dir
-$ cd dir_name           // change your directory to this new dir_name folder
-$ cd ..                 // brings you one directory up (going backward in directory tree)
+```bash
+pwd                   // tells you the current working directory with the complete path to reach from root dir
+ls                    // lists files and directories in your current dir
+ls -a                 // -a option allows you to list even the hidden files and folder
+mkdir <dir_name>      // makes the dir_name folder in current dir
+cd dir_name           // change your directory to this new dir_name folder
+cd ..                 // brings you one directory up (going backward in directory tree)
 ```
 
 **Trick**:
@@ -61,19 +28,19 @@ If you want to just skim around different directories without actually changing 
 **cd -** is another tip to quckly move back and forth between the current directory and the last directory area you visited.
 
 ## Working with files
-```
-$ cp                            // copy file
-$ cp file1 file2                // makes copy of file1 in current dir and names if file2
-$ cp /path/of/file ./           // copies the file from this path to your current dir
-$ mv                            // mv file (use to rename file as well)
-$ mv file1 file2                // renames file1 to file2 (same contents inside)
-$ touch                         // create empty file, or mostly used to update the timestamp a file
-$ chmod                         // change/modify file permissions (more later)
-$ wc                            // get counts of lines, words, characters in file (mostly used to count line with -l option)
-$ grep                          // return line(s) in file matching the pattern
-$ rm <file_name>                // removes file_name
-$ rmdir <dir_name>              // removes dir_name
-$ rm -rf <file/dir_name>        // so powerful command to remove almost anything (files, directories)
+```bash
+cp                            // copy file
+cp file1 file2                // makes copy of file1 in current dir and names if file2
+cp /path/of/file ./           // copies the file from this path to your current dir
+mv                            // mv file (use to rename file as well)
+mv file1 file2                // renames file1 to file2 (same contents inside)
+touch                         // create empty file, or mostly used to update the timestamp a file
+chmod                         // change/modify file permissions (more later)
+wc                            // get counts of lines, words, characters in file (mostly used to count line with -l option)
+grep                          // return line(s) in file matching the pattern
+rm <file_name>                // removes file_name
+rmdir <dir_name>              // removes dir_name
+rm -rf <file/dir_name>        // so powerful command to remove almost anything (files, directories)
 ```
 
 ## Displaying contents of file on the screen
@@ -93,7 +60,7 @@ $ rm -rf <file/dir_name>        // so powerful command to remove almost anything
 grep people usdoi.txt
 ```
 Some options:
-```
+```bash
 -n              // along with the matching lines, print the line number also
 -c              // get the count of matching lines
 -i              // ignore the case of the text while matching
@@ -101,26 +68,26 @@ Some options:
 -w              // match only if the pattern matches whole words
 ```
 One more example:
-```
+```bash
 grep -v login /etc/passwd               // prints all lines from the /etc/passwd file, which do not contain the pattern login
 ```
 * Using **find**: `$ find  // finds files in the current direcotry tree (this and all the directory inside of it)`.
 
 ## Compression and archiving
-```
-$ tar       // archive a set of files
-        (allows you to copy multiple files and directories into a single archive file)
-$ zip       // compress a set of files
-$ unzip     // extract files from a compressed zip archive
+```bash
+tar       // archive a set of files
+      (allows you to copy multiple files and directories into a single archive file)
+zip       // compress a set of files
+unzip     // extract files from a compressed zip archive
 ```
 
 ## Networking
-```
-$ hostname      // prints hostname
-$ ping        // send packets to URL and prints response, (CTRL-C) to cancel it
-$ ifconfig      // display or configure system network interfaces
-$ curl          // display contents of file at a URL
-$ wget        // download file from URL
+```bash
+hostname      // prints hostname
+ping        // send packets to URL and prints response, (CTRL-C) to cancel it
+ifconfig      // display or configure system network interfaces
+curl          // display contents of file at a URL
+wget        // download file from URL
 ```
 
 `$ df -h  (shows amount of disk space available on the file system)` extra one to know more.
@@ -128,7 +95,7 @@ $ wget        // download file from URL
 Now, let's discuss some of the important commands with more details and examples.
 ## tar
 This command lets you to copy  multiple files and directories info into a single file. Some of the options choices are:
-```
+```bash
  -c            // create a new archive file
  -v            // verbosely list files processed
  -f            // archive file name
@@ -155,13 +122,13 @@ unzip bin.zip
 ```
 ## Permissions/ Chaning access rights
 Only the owner of a file can use `chmod` to change the permission of a file. Example like: `$ chomod go-rwx filename` will remove read, write, and execute permission from *filename* for the group and others. Another one: `$ chmod a+rw filename` will add to all the read, write permission to *filename*.
-```
+```bash
 --r    // read
 --w    // write
 --x    // execute
 ```
 To see current permissions, `ls -l` or if you like to see the permission for a particular file `ls -l fileName.txt`, you should see something like
-```
+```bash
 rw--r--r--          // (owner read and write, group owner read only, others read only)
 ```
 Then we can now change the permissions of the file as per our requirements.
@@ -171,15 +138,15 @@ Then we can now change the permissions of the file as per our requirements.
 `+, -`          // grant or revoke operations
 
 The command below removes read permission for usdoi.txt file (this permission is updated for all the user groups):
-```
+```bash
 chmod -r usdoi.txt
 ```
 Similarly, to add read permission to this file:
-```
+```bash
 chomod +r usdoi.txt
 ```
 To remove teh read permission for others category:
-```
+```bash
 chmod o-r usdoi.txt
 ```
 ## Processes and Jobs
@@ -187,21 +154,21 @@ Running programming in your computer that has a unique **PID**. Just do `$ ps`. 
 
 **Running background processes**
 To background a process just type `&` at the end of the command line. Example:
-```
-$ sleep 10
+```bash
+sleep 10
 ```
 will wait given 10 seconds before continuing and giving you terminal to work. But you can run this sleep in background;
-```
-$ sleep 10 &
+```bash
+sleep 10 &
 ```
 And that will take care of the commands and take them to background. Similarly, sometimes `emacs` take away your terminal and so you do
 `&` at the end in that case as well.
 
 **Backgrounding the current foreground process**: already running thing can be also put into the background
-```
-$ sleep 1000        // running sleep
-Ctrl+z              // suspend the process in the foreground
-$ bg                // take the foreground program to the background
+```bash
+sleep 1000        // running sleep
+Ctrl+z              // suspend the process in the foreground to the bkg
+bg                // take the foreground program to the background
 ```
 
 **Killing a process**
@@ -209,22 +176,22 @@ Sometimes you require to kill the process because it went to the infinite loop.
 To kill the program running in the foreground `ctrl+c` will work.
 
 To kill the program suspended or background process:
-```
-$ sleep 100 &
-$ jobs          
-$ kill %4           // here 4 is the job number let's say
+```bash
+sleep 100 &
+jobs          
+kill %4           // here 4 is the job number let's say
 ```
 
 **ps (process status)**
 You could kill using PIDS
-```
-$ sleep 1000 &
-$ ps        // will list the PID to you
-$ kill PID_you_want
+```bash
+sleep 1000 &
+ps        // will list the PID to you
+kill PID_you_want
 ```
 Type `ps` again to see its status. If the process refuses to be removed use `-9` option as
-```
-$ kill -9 PID_you_want
+```bash
+kill -9 PID_you_want
 ```
 
 ## wc
@@ -237,22 +204,22 @@ $ kill -9 PID_you_want
 `hostname -l` to view ip address of the host
 
 To test if the host is reachable:
-```
+```bash
 ping www.google.com             // ctrl-c to cancel
 ```
 
 To display contents from the web on the screen:
-```
+```bash
 curl https://......./*.txt
 ```
 
 To access given URL and save it in the current directory
-```
+```bash
 curl- o https://..../*.txt
 ```
 
 To view permission of dir-name
-```
+```bash
 ls -ld dir_name
 ```
 
@@ -260,106 +227,106 @@ ls -ld dir_name
 ```bash
 ## System Basics:
 #---------------------------------------------------------------------------
-$ echo $PATH          # displays what PATH environment variable is pointing to
-$ which ls            # shows the path of the file where this command lives
-$ sudo locate *.h     # locates the file path for all .h files
-$ find *.sh           # finds the file
-$ find / -name *.sh   # finds inside / root folder
-$ grep text_to_search file(s)  # search text in file(s), and returns those lines from all files
+echo $PATH          # displays what PATH environment variable is pointing to
+which ls            # shows the path of the file where this command lives
+sudo locate *.h     # locates the file path for all .h files
+find *.sh           # finds the file
+find / -name *.sh   # finds inside / root folder
+grep text_to_search file(s)  # search text in file(s), and returns those lines from all files
     # let's see other various options
-    $ grep -c   # print count of matching line rather than returning those lines
-    $ grep -h   # not print all the files if found in many files
-    $ grep -i   # ignore case
-    $ grep -l   # print name of files that matches
-    $ grep -n   # print line number of match
-    $ grep -v   # invert the match i.e. opposite of what we search
-$ ls /path/to/list    # lists the file and folders
-$ ls -ltr <dir>       # more information while listings
-$ ls \                # waits for command next line, backslash is used for command continuation
+    grep -c   # print count of matching line rather than returning those lines
+    grep -h   # not print all the files if found in many files
+    grep -i   # ignore case
+    grep -l   # print name of files that matches
+    grep -n   # print line number of match
+    grep -v   # invert the match i.e. opposite of what we search
+ls /path/to/list    # lists the file and folders
+ls -ltr <dir>       # more information while listings
+ls \                # waits for command next line, backslash is used for command continuation
 > /                   # like doing: $ ls /
-$ apropos copy        # to see if any commands that does similar thing is available
+apropos copy        # to see if any commands that does similar thing is available
                       # apropos helps to find commands we might need
-$ man cp              # after you found the command that might be useful
-                      # learn more about it using man command to see it's manual page
-$ cat /etc/*release   # shows about the system installed
-$ hostnamectl         # more system info.
-$ uname -a            # similar as above info.
-$ uptime              # shows how long this system has been booted
-$ df -h               # shows how much disk available in human-readable format
-$ free                # shows the memory usage
-$ top                 # to see which app is using cpus
+man cp              # after you found the command that might be useful
+                    # learn more about it using man command to see it's manual page
+cat /etc/*release   # shows about the system installed
+hostnamectl         # more system info.
+uname -a            # similar as above info.
+uptime              # shows how long this system has been booted
+df -h               # shows how much disk available in human-readable format
+free                # shows the memory usage
+top                 # to see which app is using cpus
 
-$ echo h{a,e,i,o,u}llo  # prints all possibility
-$ echo h{a..z}llo       # range from a-z
-$ echo h{z..a}llo       # reverse range from z to a
-$ echo h{0..10}llo      # range of numbers as well
-$ echo {0..100..2}      # 0 through 100 interval 2
+echo h{a,e,i,o,u}llo  # prints all possibility
+echo h{a..z}llo       # range from a-z
+echo h{z..a}llo       # reverse range from z to a
+echo h{0..10}llo      # range of numbers as well
+echo {0..100..2}      # 0 through 100 interval 2
 
-$ echo "It is " $(date) "today."  # $(date) gives todays datetime
-$ history                         # to show bash command history
-$ !55                             # runs the 55th command in your command history
+echo "It is " $(date) "today."  # $(date) gives todays datetime
+history                         # to show bash command history
+!55                             # runs the 55th command in your command history
 
-$ pwd                              # prints current working directory
-$ ls <dir>
-$ cd <dir>                         # change to <dir> directory
-$ cp <source> <destination>        # copies source into destination
-$ mv <source> <destination>        # two-jobs: 1. rename source to dest, 2. moves also
-$ rm -rf <dir/files>               # very powerful delete of any files or directories
-$ mkdir <dir_name>                 # creates directory
+pwd                              # prints current working directory
+ls <dir>
+cd <dir>                         # change to <dir> directory
+cp <source> <destination>        # copies source into destination
+mv <source> <destination>        # two-jobs: 1. rename source to dest, 2. moves also
+rm -rf <dir/files>               # very powerful delete of any files or directories
+mkdir <dir_name>                 # creates directory
 
 # data manipulation:
-$ cat file.txt                     # to view the file
-$ less file.txt                    # better way to view the file
-$ touch file.txt                   # creates (if not present), else updates timestamp of the file
-$ head -n 5 file.csv                 # can view first 5 lines in csv file
-$ tail -n 5 file.csv                 # can view last 5 lines in csv file
-$ cut -f 2-5, 8 -d , file.csv        # select column from csv file, col 2-5, and 8 with delimeter ,
+cat file.txt                     # to view the file
+less file.txt                    # better way to view the file
+touch file.txt                   # creates (if not present), else updates timestamp of the file
+head -n 5 file.csv                 # can view first 5 lines in csv file
+tail -n 5 file.csv                 # can view last 5 lines in csv file
+cut -f 2-5, 8 -d , file.csv        # select column from csv file, col 2-5, and 8 with delimeter ,
 
-# Combining tools
-$ head -n 5 file.csv > file_five_rows.csv    # send the output of one command to another
+## Combining tools
+head -n 5 file.csv > file_five_rows.csv    # send the output of one command to another
         # > command works for every shell command that produces output
-$ head -n 5 file.csv | tail -n 3      # pipe or chain commands together
+head -n 5 file.csv | tail -n 3      # pipe or chain commands together
         # pipe symbol tells the shell to use the output of the command on the left
         # as the input to the command on the right
-$ cut -d , -f 1 file.csv | grep -v Date | head -n 10    # chaining commands
-$ wc file.txt    # prints the count of number of characters, words, and lines in a file
-    # -c, -w, -l options prints only the respective numbers
-$ cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort | uniq -c  # see how sort and uniq is added here
-$ ctrl + c    # to stop running a program
-$ ctrl + z    # send the process into background
+cut -d , -f 1 file.csv | grep -v Date | head -n 10    # chaining commands
+wc file.txt    # prints the count of number of characters, words, and lines in a file
+  # -c, -w, -l options prints only the respective numbers
+cut -d , -f 2 seasonal/winter.csv | grep -v Tooth | sort | uniq -c  # see how sort and uniq is added here
+ctrl + c    # to stop running a program
+ctrl + z    # send the process into background
 
 # Batch Processings:
-$ echo $HOME  # /home/shyam
+echo $HOME  # /home/shyam
     # other environment variables are: PWD, SHELL, USER, and so many
     # env. variables are written in UPPERCASE as standard
     # these variables are available all the time
-$ set | less       # to list all of them and see one page at a time
-$ printenv | less  # same as above
+set | less       # to list all of them and see one page at a time
+printenv | less  # same as above
 
 # Bash output redirection
-$ echo {a..z}{a..z}{0..9} | set     # shows combination of all possible 3 characters
-$ echo {a..z}{a..z}{0..9} > output  # instead of printing sends to the file output
+echo {a..z}{a..z}{0..9} | set     # shows combination of all possible 3 characters
+echo {a..z}{a..z}{0..9} > output  # instead of printing sends to the file output
     # note with > redirection, everything will be wiped and put new thing in output
     # instead if you want to append, you can do >>
-$ echo {a..z}{a..z}{0..9} >> output
-$ wc < output         # re-direction from file to the wc command
+echo {a..z}{a..z}{0..9} >> output
+wc < output         # re-direction from file to the wc command
     # notice the < direction of pointing
 # 0 is stdin, 1 is stdout, 2 is for stderror
-$ find / -name "linux" > out 2> error     # success will go to out, permission denied goes to error
+find / -name "linux" > out 2> error     # success will go to out, permission denied goes to error
 
 # bash expansion and substituion
-$ touch file_{1..100}.txt       # quickly create 100 files with expansion
-$ echo {1..100..3}              # every 3rd items from 1 to 100
-$ mkdir -p stuff/{a..z}/{1..100}{z..a}  # creates giant web/tree of folders with one command
+touch file_{1..100}.txt       # quickly create 100 files with expansion
+echo {1..100..3}              # every 3rd items from 1 to 100
+mkdir -p stuff/{a..z}/{1..100}{z..a}  # creates giant web/tree of folders with one command
 
 # bash aliases
 # use alias keyword to create alias
-$ alias ll='ls -ltrh'    # for nicer long listings
-$ alias ll   # to see what command it's set up to
-$ unalias ll # after you are done with it, to remove it
+alias ll='ls -ltrh'    # for nicer long listings
+alias ll   # to see what command it's set up to
+unalias ll # after you are done with it, to remove it
 ```
 
-# Script
+# Bash Scripting
 * list of commands interpreted by a scripting language, scripting language are not compiled but interpreted during the run-time, so it is slower in running! but development of the code is faster
 * commands can be entered interactively or listed in a text file
 * used to automate processes
@@ -369,10 +336,10 @@ It is a executable text file with interpreter directive, aka **shebang** directi
 `optional-arg` is s single argument string.
 
 For **bash** shell: `#!/bin/bash`. Let's write down a simple *hello_world* script that will print hello world
-```
-$ touch hello_world.sh
-$ echo '#!/bin/bash' >> hello_world.sh
-$ echo 'echo Hello World' >> hello_world.sh       // >> is the redirection operator to append to the file
+```bash
+touch hello_world.sh
+echo '#!/bin/bash' >> hello_world.sh
+echo 'echo Hello World' >> hello_world.sh       // >> is the redirection operator to append to the file
 ```
 We need to make this file executable:
 
@@ -392,34 +359,34 @@ Pipe command ` | `  connects the output of one to another and long chain of conn
 It has scope limited to shell (not global). They are all **small letters** to make easier to separate from Environment variables.
 
 To list all shell variables
-```
-$ set | head -4         // set will list all variables, but head -4 will restrict to only 4 of them to see
+```bash
+set | head -4         // set will list all variables, but head -4 will restrict to only 4 of them to see
 ```
 
 How to define shell-variables: **$ var_name=value**
-```
-$ GREETINGS="HELLO"            // we normally do all caps for the variables, and no spaces around = sign
-$ echo $GREETINGS       // to see the value of this variable, we put $ sign infront of it
+```bash
+GREETINGS="HELLO"            // we normally do all caps for the variables, and no spaces around = sign
+echo $GREETINGS       // to see the value of this variable, we put $ sign infront of it
 ```
 
-```
+```bash
 **$ unset var_name**  // deletes var_name `$ unset GREETINGS`, then no longer now available
 ```
 
 ## Environment Variables
 They are all CAPITAL letters. It has extended scope. There are number of default environment variables, but you can also upgrade shell variables into the environment variables using **export**. Like **export var_name**.
-```
+```bash
 $ export GREETINGS
 ```
 
 To list all of the environment variables: `$ printenv | less` to see in easier *less* way.
-```
+```bash
 $ printenv | grep "GREE"     // env will list all, grep GREE will list only those that starts with GREE
 ```
 
 ## Some useful features of the Bash shell
 ## Metacharacters
-```
+```bash
  #                              // precedes a comment
  ;                              // command separator `$ echo "Hello"; whoami` will exectue both commands one after another
  *                              // wildcard one or any number of times
@@ -430,7 +397,7 @@ $ printenv | grep "GREE"     // env will list all, grep GREE will list only thos
 ```
 
 ## I/O redirection
-```
+```bash
 >               // redirects output (from terminal) to a file, it also creates a file if it doesn't exist already `$ echo "hello" > hello.sh`
 >>              // instead of deleting and adding, this will append to the end of the file
 2>              // redirects standard error to file
@@ -439,21 +406,21 @@ $ printenv | grep "GREE"     // env will list all, grep GREE will list only thos
 ```
 
 Let's go through one example:
-```
-$ echo "line1" > eg.txt                // creates eg.txt and adds line1 in line 1 of the file
-$ cat eg.txt                            // to see what's in the line1
-$ echo "line2" >> eg.txt                // appends line2 in line 2 of the file
-$ cat eg.txt                            // verify if it is the case
+```bash
+echo "line1" > eg.txt                // creates eg.txt and adds line1 in line 1 of the file
+cat eg.txt                            // to see what's in the line1
+echo "line2" >> eg.txt                // appends line2 in line 2 of the file
+cat eg.txt                            // verify if it is the case
 
-$ garbage       // will throw an error: garbage: command not found
-$ garbage 2> err.txt    // we will sometime like to save what errors is our command throwing at us (saving in a file)
+garbage       // will throw an error: garbage: command not found
+garbage 2> err.txt    // we will sometime like to save what errors is our command throwing at us (saving in a file)
 ```
 
 ## Command Substitution
 Replace command with its output. `$(command)`. It stores the output of one command as the variable values. Example:
-```
-$ here=$(pwd)           // save the output generated by command pwd in a variable
-$ echo $here            // indeed here variable created with the value of pwd
+```bash
+here=$(pwd)           // save the output generated by command pwd in a variable
+echo $here            // indeed here variable created with the value of pwd
 ```
 
 ## Batch mode vs. Concurrent mode
@@ -465,58 +432,58 @@ Bash is a shell, a program that let's interact with system. Bash is more popular
 
 ## Using Bash:
 ```bash
-$ bash --version    # to show which version installed
-$ echo $SHELL       # to check if bash is currently active
+bash --version    # to show which version installed
+echo $SHELL       # to check if bash is currently active
 
 # pipe and re-direction
-$ cat longFile.txt | less                # pipe output to less, so you can see page by page
-$ cat longFile.txt | wc                  # to count line, words, characters using wc
-$ ls > list.txt                          # sends all the output to list.txt, replacing old contents
-$ ls >> list.txt                         # instead for replacing, we could append
-$ find / -name "Linux" >output 2> error  # send good output to output, errors to error file
+cat longFile.txt | less                # pipe output to less, so you can see page by page
+cat longFile.txt | wc                  # to count line, words, characters using wc
+ls > list.txt                          # sends all the output to list.txt, replacing old contents
+ls >> list.txt                         # instead for replacing, we could append
+find / -name "Linux" >output 2> error  # send good output to output, errors to error file
     # 2> is needed here 2 to tell that we want to re-direct the error
-$ cat < file.txt             # input re-direction to give input from file to cat command
+cat < file.txt             # input re-direction to give input from file to cat command
     # note the < where it is pointing and how the output is flowing.
 
 # bash built-ins, or command
-$ echo Hello There   # echo is built-in, it ends with newline, nice thing!
-$ command echo hello # to run command echo version
-$ builtin echo hello # built-in version
-$ command -V df
+echo Hello There   # echo is built-in, it ends with newline, nice thing!
+command echo hello # to run command echo version
+builtin echo hello # built-in version
+command -V df
     df is /usr/bin/df   # this means it is built-in
-$ help       # to list all built-ins
-$ help echo  # to see more about echo built-in
+help       # to list all built-ins
+help echo  # to see more about echo built-in
 
 # Bash expansion and substitution
-$ echo ~     # shows your home directory, tilde expansion
-$ echo /tmp/{one,two,three}/file.txt    # creates one,two,three i.e. specified folders
-$ echo c{a,o,u}t                    # again uses specified character in between
-$ echo {1..100}                     # shows 1 to 100 like a range based expansion
-$ echo {1..100..2}                  # expansion but with step of 2
-$ echo {100..1}                     # reverse order
-$ echo {01..100}                    # keeps the padding same: 001, 002, 003, ... ,099, 100
-$ echo {a..z}
-$ echo {Z..A}
-$ echo {a..z..2}
-$ touch file_{01..12}{a..d}.txt     # creating some pattern/sequential type files instantly
-$ echo {cat,dog,fox}_{1..5}
+echo ~     # shows your home directory, tilde expansion
+echo /tmp/{one,two,three}/file.txt    # creates one,two,three i.e. specified folders
+echo c{a,o,u}t                    # again uses specified character in between
+echo {1..100}                     # shows 1 to 100 like a range based expansion
+echo {1..100..2}                  # expansion but with step of 2
+echo {100..1}                     # reverse order
+echo {01..100}                    # keeps the padding same: 001, 002, 003, ... ,099, 100
+echo {a..z}
+echo {Z..A}
+echo {a..z..2}
+touch file_{01..12}{a..d}.txt     # creating some pattern/sequential type files instantly
+echo {cat,dog,fox}_{1..5}
 # parameter expansion
-$ a="Hello World"
-$ echo $a          # this is a parameter expansion
-$ echo ${a//e/_}   # readin variable, search e, replace with _
-$ echo ${a:6}      # print after 6th and after characters
-$ echo ${a:6:3}    # after 6th, just print 3 characters
+a="Hello World"
+echo $a          # this is a parameter expansion
+echo ${a//e/_}   # readin variable, search e, replace with _
+echo ${a:6}      # print after 6th and after characters
+echo ${a:6:3}    # after 6th, just print 3 characters
 # command substitution
-$ uname -r                            # to see release verion of the kernel
-$ echo "The kernel is $(uname -r)."
-$ echo "The Python version is $(python -V)." # see how we used ()  parenthesis
+uname -r                            # to see release verion of the kernel
+echo "The kernel is $(uname -r)."
+echo "The Python version is $(python -V)." # see how we used ()  parenthesis
 # arithmetic expansion
-$ $(())     # two parenthesis
-$ echo $((2+2))  # shows 4
-$ echo $((4-2))  # 2
-$ echo $((4*2))  # 8
-$ echo $((4/5))  # 0, bash only does integer work
-$ echo $((5%4))  # 1, modulo % gives remainder
+$(())     # two parenthesis
+echo $((2+2))  # shows 4
+echo $((4-2))  # 2
+echo $((4*2))  # 8
+echo $((4/5))  # 0, bash only does integer work
+echo $((5%4))  # 1, modulo % gives remainder
 ```
 
 ## Programming with Bash
@@ -532,108 +499,108 @@ echo "there"
 ```
 **echo** command is the most used command and used for displaying things in the terminal or directed elsewhere. Let's see some usage of echo command.
 ```bash
-$ echo hello
+echo hello
 >> hello
-$ echo hello world
+echo hello world
 >> hello world
-$ worldsize=big   # defining a variable
-$ echo hello $worldsize world
+worldsize=big   # defining a variable
+echo hello $worldsize world
 >> hello big world
-$ echo "The kernel is $(uname -r)."   # double quote is better
+echo "The kernel is $(uname -r)."   # double quote is better
 >> The kernel is <shows_your_kernel>.
-$ echo -n   # gives no newline, needs sometime
+echo -n   # gives no newline, needs sometime
 ```
 
 **variables** allows us to store and retrieve values by name. Bash variables are special case of parameter substitution. Variables are named with alphanumeric characters. There should be **no spaces** on either side of the equal sign. Variable names are case-sensitive. Many times we use lowercase names for variables like: `mygreeting=Hello`. Uppercase is good to put for the environment and system variables.
 ```bash
-$ mygreeting=Hello
-$ mygreeting2="Good Morning!"
-$ number=16
-$ echo $mygreeting
+mygreeting=Hello
+mygreeting2="Good Morning!"
+number=16
+echo $mygreeting
 >> Hello
-$ declare -r myName="Shyam Chauhan"   # it won't let change the value of var later
-$ echo $myName
+declare -r myName="Shyam Chauhan"   # it won't let change the value of var later
+echo $myName
 >> Shyam Chauhan
 ```
 
 **Working with Numbers** we can do arithmetic expansion that returns the result of mathematical operations `$((...))` or arithmetic evaluation performs calculations and changes the value of variable `((...))`. Bash supports six different airthmetic operations `+, -, *, /, %, **` as addition, subtraction, multiplication, division, modulo, exponentiation respectively. Note only does integer division (No float in Bash).
 ```bash
-$ echo $((4+4))
+echo $((4+4))
 >> 8
-$ echo $((8-5))
+echo $((8-5))
 >> 3
-$ echo $((2*3))
+echo $((2*3))
 >> 6
-$ echo $((8/4))
+echo $((8/4))
 >> 2
-$ echo $(( (3+6)-5*(5*2) ))
+echo $(( (3+6)-5*(5*2) ))
 >> -41
-$ a=3
-$ ((a+=3))
-$ echo $a
+a=3
+((a+=3))
+echo $a
 >> 6
-$ ((a++))  # also has ((a--))
-$ echo $a
+((a++))  # also has ((a--))
+echo $a
 >> 7
-$ declare -i b=3   # to make b as int always
-$ echo $b
+declare -i b=3   # to make b as int always
+echo $b
 >> 3
-$ b=$b+4
-$ echo $b
+b=$b+4
+echo $b
 >> 7
 
 # to get random numbers
-$ echo $RANDOM
-$ echo $(( 1 + RANDOM % 10 ))    # can be thought as random bet 1 and 10
+echo $RANDOM
+echo $(( 1 + RANDOM % 10 ))    # can be thought as random bet 1 and 10
 ```
 To do more precise calculations, we need to use `bc` or `awk`.
 ```bash
-$ declare -i c=1
-$ declare -i d=3
-$ e=$(echo "scale=3; $c/$d"|bc)  # still just character and strings no number
-$ echo $e
+declare -i c=1
+declare -i d=3
+e=$(echo "scale=3; $c/$d"|bc)  # still just character and strings no number
+echo $e
 >> .333
 ```
 
 **To Compare/Test things**:
 ```bash
 # these are all single bracket notation, later we also see double bracket notation.
-$ [ -d ~ ]   # to test if home is a directory
+[ -d ~ ]   # to test if home is a directory
              # nothing returns means success
-$ echo $?    # shows what was the output of last command, which is 0
-$ [ -d /bin/bash ]; echo $?  # its a file, not dir
+echo $?    # shows what was the output of last command, which is 0
+[ -d /bin/bash ]; echo $?  # its a file, not dir
 >> 1    # 0 is exit success, and 1 is exit failure
-$ help test | less    # to see what you can check compare test with test
-$ [ "cat"="dog" ]; echo $?   # not equal, exits 1
+help test | less    # to see what you can check compare test with test
+[ "cat"="dog" ]; echo $?   # not equal, exits 1
 >> 1
-$ [ 4 -lt 5 ]; echo $?   # true 0
+[ 4 -lt 5 ]; echo $?   # true 0
 >> 0
-$ [ 4 -lt 3 ]; echo $?  # false 1
+[ 4 -lt 3 ]; echo $?  # false 1
 >> 1
-$ [ ! 4 -lt 3 ]; echo $?  # not False -> True
+[ ! 4 -lt 3 ]; echo $?  # not False -> True
 >> 0
 ```
 Double brackets test;
 ```bash
 # extended double bracket test gives previous feature + additional things
 # i.e. we can combine tests to make more logical
-$ [[ 4 -lt 3 ]]; echo $?  # false
+[[ 4 -lt 3 ]]; echo $?  # false
 >> 1
-$ [[ -d ~ && -a /bin/bash ]]; echo $?  # if home is dir, if bash binary file exists
+[[ -d ~ && -a /bin/bash ]]; echo $?  # if home is dir, if bash binary file exists
 >> 0
-$ [[ -d ~ && -a /bin/mash ]]; echo $?  # no such file mash in bin, False
+[[ -d ~ && -a /bin/mash ]]; echo $?  # no such file mash in bin, False
 >> 1
-$ [[ -d ~ || -a /bin/mash ]]; echo $?  # OR operator however is True
+[[ -d ~ || -a /bin/mash ]]; echo $?  # OR operator however is True
 >> 0
-$ [[ -d ~ ]] && echo ~ is a directory  # since True, will see output
-$ [[ -d /bin/bash ]] && echo /bin/bash is a directory  # fails first part, no output
-$ true && echo "True"   # built-in 'true' and 'false' also exists.
+[[ -d ~ ]] && echo ~ is a directory  # since True, will see output
+[[ -d /bin/bash ]] && echo /bin/bash is a directory  # fails first part, no output
+true && echo "True"   # built-in 'true' and 'false' also exists.
 ```
 
 **Formatting and Styling text output**: `echo -e` interprets escaped characters like \t, \n, \a, and other control character so that we can have nice formatting and colors output. For example if we want nice two columns and nice formatted version of it, we can do the following:
 ```bash
-$ echo -e "Name\t\tNumber"; echo -e "Shyam\t\t1234"
-$ echo -e "This text\nbreaks over\nthree lines"
+echo -e "Name\t\tNumber"; echo -e "Shyam\t\t1234"
+echo -e "This text\nbreaks over\nthree lines"
 ```
 See below for the formatting with some colors:
 ```bash
@@ -648,8 +615,8 @@ echo -e $ulinered"ERROR:"$none$red" Something went wrong."$none
 
 **Formatting output with printf**: Outputs text using placeholders and formatting. See the difference:
 ```bash
-$ echo "The results are: $(( 2 + 2 )) and $(( 3 / 1 ))"
-$ printf "The results are: %d and %d\n" $((2+2)) $((3/1))  # it uses placeholder like %d
+echo "The results are: $(( 2 + 2 )) and $(( 3 / 1 ))"
+printf "The results are: %d and %d\n" $((2+2)) $((3/1))  # it uses placeholder like %d
 >> The results are: 4 and 3
 #    %d is for digit
 #    %s is for string
@@ -805,7 +772,80 @@ do
 done
 ```
 
+**using `case`
+* checks an input against a set of predefined values
+* runs code when an input matches a condition
+```bash
+#!/bin/bash
+animal=dog
+case $animal in
+    bird) echo "Avian";;    # ) is used to end the search value
+    dog|puppy) echo "Canine";;   # ;; is used to end the case
+    *) echo "No match!";;
+esac  # back case, esac to end case
+```
 
+**using functions** Functions allow us to repeatedly call a piece of code.
+syntax
+```bash
+fname(){
+    ...
+}
+```
+examples
+```bash
+#!/usr/bin/env bash
+greet(){
+    echo "Hi there, $1 What a nice $2!"  # $1 means it will take first argument passed to function
+}
+
+echo "And now, a greeting!"
+greet Shyam Morning  # second argument takes place in place of $2 above
+
+## next: using @ to take all values
+numberthings(){
+    i=1
+    for f in "$@"; do
+        echo $i: "$f"
+        ((i++))
+    done
+}
+numberthings /*   # list all in home dir with number at front
+echo  # just for newline
+numberthings pin birch maple spruce  # list these with numbers and items
+
+## local variables lives only inside of function
+var1="I am variable 1"
+
+myfunction(){
+    var2="I am variable 2"
+    local var3="I am variable 3, but local"   # using local keyword at front
+}
+
+myfunction
+echo $var1
+echo $var2
+echo $var3    # this won't print/show
+```
+
+**reading and writing text files**
+* Write to files with output redirection operators (> and >>)
+    * `echo "abc" > out.txt` overwrites the contents of out.txt
+    * `echo "abc" >> out.txt` appends to the end fo out.txt
+* Read from files input redirection (<) and read command
+    * `while read line; do echo $line; done < in.txt`
+```bash
+#!/usr/bin/env bash
+for i in 1 2 3 4 5
+do
+    echo "This is line $i" >> textfile.txt  # To write on file
+done
+
+## to read a file:
+while read f
+    do echo "I read a line and it says: $f"
+done < textfile.txt
+```
 
 
 
@@ -859,22 +899,22 @@ done
 It is a feature of the shell, that helps us to combine different unrelated commands in such a way that one commands output is sent directly as input to the next command. This way, what is not possilbe with a single command can be made possible by connecting multiple commands.
 
 Example: To count the total number of files and folders in your current directory:
-```
-$ ls | wc -l    // ls lists the files, wc -l now will count them and only prints the total line numbers
+```bash
+ls | wc -l    // ls lists the files, wc -l now will count them and only prints the total line numbers
 
-$ df -h | grep overlay  // df -h gives us disk usage info, and grep allows to show only the one that is overlay
+df -h | grep overlay  // df -h gives us disk usage info, and grep allows to show only the one that is overlay
 ```
 
 How to list five (or any number) largest files in some directory or current dir:
-```
-$ ls -ls /bin | head -6         // -s option sorts the files from largest to smallest size
+```bash
+ls -ls /bin | head -6         // -s option sorts the files from largest to smallest size
 ```
 
 ## Command line arguments
 Command line arguments are a very convenient way to pass inputs to a script. Command line arguments can be accessed inside the script as `$1, $2, and so on`. `$1` is the first argument, `$2` is the second argument, and so on.
 
 Let's see one example case: make a file name **wish.sh**
-```
+```bash
 #!/bin/bash
 echo "Hi $1 $2"
 echo "$1 is your firstname"
@@ -882,16 +922,16 @@ echo "$2 is your lastname"
 ```
 
 Next, you do compile and run:
-```
-$ chmod +x wish.sh              // making executable
-$ ./wish.sh Shyam Chauhan       // Shyam is first agrument given, Chauhan is second argument given
-        prints: Hi Shyam Chauhan
-                Shyam is your firstname
-                Chauhan is your lastname
+```bash
+chmod +x wish.sh              // making executable
+./wish.sh Shyam Chauhan       // Shyam is first agrument given, Chauhan is second argument given
+      prints: Hi Shyam Chauhan
+              Shyam is your firstname
+              Chauhan is your lastname
 ```
 
 example2: let's make **dirinfo.sh** file:
-```
+```bash
 #!/bin/bash
 dircount=$(find $1 -type d | wc -l)             // counts directory in $1 argument provided later in command line
 filecount=$(find $1 -type f | wc -l)            // counts file number
@@ -900,23 +940,23 @@ echo "There are $filecount files in the directory $1"
 ```
 
 Next, compile and run
-```
-$ chmod +x dirinfo.sh
-$ ./dirinfo.sh /tmp             // we want to see info of /tmp folder here
+```bash
+chmod +x dirinfo.sh
+./dirinfo.sh /tmp             // we want to see info of /tmp folder here
 ```
 
 **Problem**
 Display the count of all files whose name starts with 'c' in the /bin directory:
 
 sol:
-```
-$ find /bin/c* -type f | wc -l
+```bash
+find /bin/c* -type f | wc -l
 ```
 
 Write a Shell script named *latest_warnings.sh* that prints the latest 5 warnings from the */var/log/bootstrap.log* file
 
 sol:
-```
+```bash
 #!/bin/bash
 grep warning /var/log/bootstrap.log | tail -5
 ```
@@ -928,7 +968,7 @@ This is helpful when you might need to run certain jobs automatically at certain
 
 Each line is crontab file has five time-and-date fields, followed by a command, followed by a newline character `\n`. The fields are separated by spaces.
 
-```
+```bash
 minute  (0-50)
 hour    (0-23, 0=midnight)
 day     (1-31)
@@ -937,9 +977,9 @@ weekday (0-6, 0=Sunday)
 ```
 
 To use crontab:
-```
-$ crontab -l            // -l option prints the current crotab jobs list
-$ crontab -e            // if no jobs queued, create new crontab file (it should open this file in your default editor)
+```bash
+crontab -l            // -l option prints the current crotab jobs list
+crontab -e            // if no jobs queued, create new crontab file (it should open this file in your default editor)
 ```
 
 Let's say you put the following line in your crontab file:
@@ -952,21 +992,21 @@ Once you have created the crontab file, you might go back and check to see if th
 
 ## Schedule a Shell Script
 Let's create a simple shell script file name *diskusage.sh* that prints the current time and the current disk usage statistics.
-```
+```bash
 #!/bin/bash
 date
 df -h
 ```
 
 Then compile and run:
-```
-$ chmod +x diskusage.sh
-$ ./diskusage.sh
+```bash
+chmod +x diskusage.sh
+./diskusage.sh
 ```
 
 Let's schedule to run this scripts everyday at midnight 12:00 (0 in 24 hr clock). And, we want the output of this script be appended to */home/project/diskusage.log*:
-```
-$ crontab -e            // edit the crontab file now
+```bash
+crontab -e            // edit the crontab file now
 ```
 Put the following line into crontab file:
 
@@ -1023,7 +1063,7 @@ Awk can do simple maths as well. Let's see one such example:
 awk '{print $1"*"$1,"=",$1*$1}' a.txt
 ```
 shows:
-```
+```bash
 1*1 = 1
 2*2 = 4
 3*3 = 9
@@ -1042,7 +1082,7 @@ Now let's make helloworld.awk file with the same contents as above and execute t
 Awk is a text-parsing tool for UNIX-like systems, it can also be called a programming language on its own because it contains the functions ability.
 
 We work on this data file: colors.txt
-```
+```bash
 name       color  amount
 apple      red    4
 banana     yellow 6
@@ -1063,8 +1103,8 @@ awk [option] 'pattern {action}' file
 In awk, the `print` function dsiplays whatever you specify. There are many predefined variables you can use, but some of the most common are integers designating the columns in a text file.
 ```bash
 $ awk '{print $2}' colors.tx                    // colors.txt is the file location
+#  $2 denotes the second column `print $0` will print all the columns.
 ```
-$2 denotes the second column. `print $0` will print all the columns.
 
 ### Conditional selection of the columns
 For example the following will look into the col2 and see if it has yellow matching and prints all the col1 contents for it.
@@ -1084,7 +1124,7 @@ awk '$3>5 {print $1, $2}' colors.txt
 ```
 ### Field Separator ( comma, whitespace, etc)
 Let's see how awk separates comma separated file. By default, awk uses whitespace as the field separator, though. So, to check let's first create **colors.csv** file now as:
-```
+```bash
 name,color,amount
 apple,red,4
 banana,yellow,6
@@ -1119,7 +1159,7 @@ It is a command line command, it take output of a command and passes it as argum
 **xargs** reads items from the standard input, delimited by blanks and executes the command one or more times with any initial-arguments followed by items read from standard input.
 
 Do you need to string some linux commands together, but one (mkdir, rm, etc.) of them doesn't accept the piped input? `xargs` can take the output from one command and send it to another command as parameters (or arguments).
-```
+```bash
 // to output all the output from previous command into single line
 $ ls -ltr | xargs       // default echo command is exectued
 
@@ -1133,8 +1173,6 @@ $ ls -ltr | xargs wc
 
 // to create a multiple files
 $ echo 'one two three' | xargs -p touch      // -p option lets to confirm before final execution
-
-
 ```
 
 # The AWK Programming Language: Tutorials
@@ -1142,7 +1180,7 @@ $ echo 'one two three' | xargs -p touch      // -p option lets to confirm before
 [Book](http://ia803404.us.archive.org/0/items/pdfy-MgN0H1joIoDVoIC7/The_AWK_Programming_Language.pdf)
 
 Suppose you have a file name **file.txt** that contains the data like name, pay rate, and hours worked. Now you want to see name, and total to pay. i.e you have this: Beth,4.00,0 - one entry. Then you want to do:
-```
+```bash
 awk '$3>0 {print $1, $2*$3}' file.txt
 ```
 The part inside the quote is a complete program. Practice more from this book!! Good luck
@@ -1207,13 +1245,6 @@ grep -w ERROR logFile.txt
 ```
 searches all instances of 'ERROR' but not search in 'sysERROR'.
 
-
-
-# More Resources
-
-While my compiled notes from above is already thorough, it is by no means complete, and neither will be any of the below. However, having many people way of presenting the same topics will give us more proper knowledge. So, here are the lists of more refernces:
-
-- [the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line)
 
 
 
