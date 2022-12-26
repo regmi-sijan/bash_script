@@ -1,5 +1,3 @@
-# UNIX/LINUX commands and Bash Scripting
-
 ## Reference Lists :book:
 
 * [Coursera IBM Course](https://www.coursera.org/learn/hands-on-introduction-to-linux-commands-and-shell-scripting)
