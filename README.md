@@ -1,13 +1,3 @@
-## Reference Lists :book:
-
-* [Coursera IBM Course](https://www.coursera.org/learn/hands-on-introduction-to-linux-commands-and-shell-scripting)
-* [tutorials point](https://www.tutorialspoint.com/unix/index.htm)
-* [Unix tutorial for beginners](http://www.ee.surrey.ac.uk/Teaching/Unix/)
-* [Learning Bash Scripting (LinkedIn)](https://www.linkedin.com/learning/learning-bash-scripting-17063287)
-* [Advanced Bash-Scripting Guide](https://tldp.org/LDP/abs/html/index.html)
-* [the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line)
-* [AWK textbook](http://ia803404.us.archive.org/0/items/pdfy-MgN0H1joIoDVoIC7/The_AWK_Programming_Language.pdf)
-
 A **shell** is a powerful user interface for UNIX-like operating system. It can interpret commands, and run other programs.
 
 ## Starting with some basics
@@ -322,6 +312,22 @@ alias ll='ls -ltrh'    # for nicer long listings
 alias ll   # to see what command it's set up to
 unalias ll # after you are done with it, to remove it
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Bash Scripting
 Bash is a shell, a program that let's interact with system. Bash is more popular system, available to many platforms.
@@ -841,53 +847,52 @@ while read f
 done < textfile.txt
 ```
 
+**Working with arguments**
+* Allow us to pass information into a script from the CLI
+* Are text that represent a string, a filename, and so on
+* Are represented by numbered variables ($1, $2, and so on)
+* `$0` is the name of the script, `$1` a first argument, and so on
+```bash
+#!/usr/bin/env bash
+echo "The $0 script got the argument: $1"
+echo "Argument 2 is: $2"
 
+>> ./myscript Apple Oragne  # running the script named myscript with Apple argument
+>> The ./myscript script got the argument: Apple
+>> Argument 2 is: Orange
 
+# to give any number of arguments
+fo i in "$@"  # double quote assures that if argument comes with space, it will be
+              # treated as one argument
+do
+    echo $i
+done
+echo "There were $# arguments"  # $# will tell how many arguments supplied
 
+# this time we can give as many arguments
+```
 
+**Working with options**
+* Allow us to pass information into a script from the CLI
+* Are a combination of a dash and a letter (like -u or -p)
+* Are accessed using the `getopts` keyword
+* Can accept arguments of their own
+* Can be specified and used in any order
+```bash
+#!/usr/bin/env bash
+while getopts :u:p:ab option; do         # : for no defined option
+                                  # u: for -u option, ab for no arguments option
+    case $option in
+        u) user=$OPTARG;;
+        p) pass=$OPTARG;;
+        a) echo "got the 'a' flag";;
+        b) echo "got the 'b' flag";;
+        ?) echo "I don't know what $OPTARG is!"
+    esac
+done
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+> ./myscript -u shyam -p supe3d -a -b -x  # -x will throw ? error
+```
 
 ## command pipeline:
 It is a feature of the shell, that helps us to combine different unrelated commands in such a way that one commands output is sent directly as input to the next command. This way, what is not possilbe with a single command can be made possible by connecting multiple commands.
@@ -1010,6 +1015,23 @@ Then, `$ crontab -l` to confirm that the job has been put into the schedule.
 
 ## Remove the current crontab:
 The `-r` option `$ crontab -r` causes the current crontab to be removed. Be cautious doing this as it removes your entire scheduled crontab jobs.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # The AWK Programming Language: Tutorials
@@ -1183,6 +1205,15 @@ The part inside the quote is a complete program. Practice more from this book!! 
 
 
 
+
+
+
+
+
+
+
+
+
 # Real-World Examples Usages:
 ## grep:
 1. How to ignore some words doing search using grep?
@@ -1233,8 +1264,16 @@ grep -w ERROR logFile.txt
 ```
 searches all instances of 'ERROR' but not search in 'sysERROR'.
 
+## Reference Lists :book:
 
-
+* [Coursera IBM Course](https://www.coursera.org/learn/hands-on-introduction-to-linux-commands-and-shell-scripting)
+* [tutorials point](https://www.tutorialspoint.com/unix/index.htm)
+* [Unix tutorial for beginners](http://www.ee.surrey.ac.uk/Teaching/Unix/)
+* [Learning Bash Scripting (LinkedIn)](https://www.linkedin.com/learning/learning-bash-scripting-17063287)
+* [Advanced Bash-Scripting Guide](https://tldp.org/LDP/abs/html/index.html)
+* [the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line)
+* [AWK textbook](http://ia803404.us.archive.org/0/items/pdfy-MgN0H1joIoDVoIC7/The_AWK_Programming_Language.pdf)
+* [MIT course](https://missing.csail.mit.edu/2020/)
 
 
 
