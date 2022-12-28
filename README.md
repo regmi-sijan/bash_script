@@ -1032,14 +1032,9 @@ The `-r` option `$ crontab -r` causes the current crontab to be removed. Be caut
 
 
 
-
-
-# The AWK Programming Language: Tutorials
-
->**Important to remember is that there are text-parsing tools that you can use for your needs to search/filter/ out the required patterns for your programming needs** -> just be aware of this
-
-
+# awk
 In simple terms, it is a common programming task that separates the given series of text into smaller components based on some rules. We could use various programming laguages to accomplish the text-parsing like using python's Regular Expressions, Tokenization; perl scripts; or **awk** for UNIX-like system doing readily from the command-lines. With awk we can process large size data texts because, instead of loading the entire text into memory, we're reading it sequentially in chunks. AWK is a pattern matching programming language.
+> Awk is mainly intended for the column data types.
 
 Awk main syntax:
 ```bash
@@ -1088,7 +1083,7 @@ shows:
 ```
 given `a.txt` has 1,..4 in a separate line.
 
-### Hello World! - command line
+## Hello World! - command line
 When an AWK program contains the `BEGIN` pattern without another special pattern, AWK will not expect any further command line input and exit.
 ```bash
 awk 'BEGIN { print  "Hello World!"  }'
@@ -1116,14 +1111,14 @@ Awk's basic syntax:
 ```bash
 awk [option] 'pattern {action}' file
 ```
-### printing a column
+## printing a column
 In awk, the `print` function dsiplays whatever you specify. There are many predefined variables you can use, but some of the most common are integers designating the columns in a text file.
 ```bash
 $ awk '{print $2}' colors.tx                    // colors.txt is the file location
 #  $2 denotes the second column `print $0` will print all the columns.
 ```
 
-### Conditional selection of the columns
+## Conditional selection of the columns
 For example the following will look into the col2 and see if it has yellow matching and prints all the col1 contents for it.
 ```bash
 awk '$2=="yellow"{print $1}' colors.txt
@@ -1139,7 +1134,7 @@ To print with condition that the third column containing an integer greater than
 ```bash
 awk '$3>5 {print $1, $2}' colors.txt
 ```
-### Field Separator ( comma, whitespace, etc)
+## Field Separator ( comma, whitespace, etc)
 Let's see how awk separates comma separated file. By default, awk uses whitespace as the field separator, though. So, to check let's first create **colors.csv** file now as:
 ```bash
 name,color,amount
@@ -1158,19 +1153,135 @@ awk can treat the data in exactly same way, as long as you specify which charact
 awk -F"," '$2=="yellow" {print $1}' colors.csv
 ```
 
-### Saving output
+## Saving output
 Using output redirection operator, we can easily save the output of our search and filters. Like:
 ```bash
 awk -F"," '$2=="yellow" {print $1}' colors.csv > output.txt
 ```
 This will create the output.txt file that contains the filtered data.
 
-### Search Pattern
+## Search Pattern
 Most of the time we need searching certain patterns through the text. To do that awk also supports the **regular expressions** to create such patterns.
 
+>This is the start of **awk essential training** from the LinkedIn Learning.
+## Awk command line basics
+In awk_ex_files dir, there is a file named `names.txt` which contains *firstName lastName* in two column. How can we print the same info but now in reverse order *lastName firstName*. `$1, $2` are the column (field) numbers in awk.
+```bash
+awk ' {print $2, $1} ' names.txt   # , makes one space between them
+```
+`$0` is the full line and so will print complete lines each time generating original copy of the file.
+`NF` means the number of field, that means we can count number of columns in a line when awk reads a file.
+
+```bash
+awk '{print NF, $0}' dukeofyork.txt    # get the complete line and also count NF
+```
+Anything that is inside is an action and so it will be applied to each line in the file. We can put the patterns at the front of each line to make matching more complex.
+```bash
+awk '/up/{print NF, $0}' dukeofyork.txt  # searches only where up is there in a line
+awk 'NF==6{print NF, $0}' dukeofyort.txt  # only print where NF==6 for each line in a file
+```
+We can remove either patterns or actions but not both. So, let's say we remove the action and just leave pattern, then that will print the lines with match pattern but no any other actions.
+```bash
+awk 'NF==6' dukeofyork.txt
+```
+We can even combine multiple pattern and action combination as well. Let's see that;
+```bash
+awk '/up/{print "UP:", NF, $0} /down/{print "DOWN:", NF, $0}' dukeofyork.txt
+# matches lines that has up and puts UP NF and so on, same if a line has down word
+# if a line has both up and down, both pattern-action will be executed
+```
+We don't always have to write awk program in a command line, we could write them in the file and use file to do our awk thing. It has advantage, it will be reusable, less error-prone, and don't need to protect the program from shell using single quote around. Let's see one example. We have awk program file in awk_ex_files directory named `swap` that swaps the two field firstName lastName into lastName firstName way. We can use `-f` flag to use the file to do awk. To use this file:
+```bash
+cat swap  # let's see inside first
+>> {print $2, $1}  # no need of a single quote
+
+awk -f swap names.txt   # use -f flag to use a file to do awk
+```
+The capital letter `-F` version is little different, it is used to do the field separater while doing awk.
+```bash
+awk -F , '{print $2}'   # telling field separater is comma and print second field
+one,two,three
+>two
+awk -F t '{print $2}'   # field separater is a tab
+one  two  three
+>two
+awk -v hi=HELLO '{print $1, hi}'  # here hi is action takes the value defined earlier
+hello awk
+>hello HELLO
+```
+You can take the input from a file into awk.
+```bash
+awk '{print NF, $0}' < dukeofyork.txt
+```
+Of course we can also do the pipe.
+```bash
+uptime | awk '{print NF, $0}'
+```
+awk output can also be pipe to some other programs.
+```bash
+awk '{print NF, $0}' dukeofyork.txt | sort -n         # sort numeric col
+```
+
+## Understanding Records and Fields
+
+## Understanding Variables and Operators
+
+## Quick intro to regex
+
+## Using Control Structures
+
+## Formatting the output
+
+## Functions and Arrays
+
+## Combining AWK with other tools
 
 
-## xargs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# xargs
 It is a command line command, it take output of a command and passes it as argument of another command. If no command is specified, xargs executes echo by default. Because many commands like echo, rm, mkdir don't accpet the standard input as agruments, using xargs we can force them to do it.
 
 **xargs** reads items from the standard input, delimited by blanks and executes the command one or more times with any initial-arguments followed by items read from standard input.
@@ -1274,6 +1385,7 @@ searches all instances of 'ERROR' but not search in 'sysERROR'.
 * [the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line)
 * [AWK textbook](http://ia803404.us.archive.org/0/items/pdfy-MgN0H1joIoDVoIC7/The_AWK_Programming_Language.pdf)
 * [MIT course](https://missing.csail.mit.edu/2020/)
+* [Awk essential training (LinkedIn)](https://www.linkedin.com/learning/awk-essential-training/)
 
 
 
