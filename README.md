@@ -3,31 +3,31 @@ A **shell** is a powerful user interface for UNIX-like operating system. It can 
 ## Starting with some basics
 
 ```bash
-pwd                   // tells you the current working directory with the complete path to reach from root dir
-ls                    // lists files and directories in your current dir
-ls -a                 // -a option allows you to list even the hidden files and folder
-mkdir <dir_name>      // makes the dir_name folder in current dir
-cd dir_name           // change your directory to this new dir_name folder
-cd ..                 // brings you one directory up (going backward in directory tree)
-cd -                  // toggles betweent the current and last directory you visited
+pwd                   # tells you the current working directory with the complete path to reach from root dir
+ls                    # lists files and directories in your current dir
+ls -a                 # -a option allows you to list even the hidden files and folder
+mkdir <dir_name>      # makes the dir_name folder in current dir
+cd dir_name           # change your directory to this new dir_name folder
+cd ..                 # brings you one directory up (going backward in directory tree)
+cd -                  # toggles betweent the current and last directory you visited
 ```
 
 **Tips**: If you want to just skim around different directories without actually changing your directory, you can do so using `ls` command. You can just `ls` the directories you want to quickly peek into and sort of use **up and down** arrow keys to quickly move back and forth to previoulsy visited areas. I always use this method to go into the very deep of the directory root and when I see where I want to go, I finally do up key and **cd** into this directory.
 
 ## Working with files
 ```bash
-cp                            // copy file
-cp file1 file2                // makes copy of file1 in current dir and names if file2
-cp /path/of/file ./           // copies the file from this path to your current dir
-mv                            // mv file (use to rename file as well)
-mv file1 file2                // renames file1 to file2 (same contents inside)
-touch                         // create empty file, or mostly used to update the timestamp a file
-chmod                         // change/modify file permissions (more later)
-wc                            // get counts of lines, words, characters in file (mostly used to count line with -l option)
-grep                          // return line(s) in file matching the pattern
-rm <file_name>                // removes file_name
-rmdir <dir_name>              // removes dir_name
-rm -rf <file/dir_name>        // so powerful command to remove almost anything (files, directories)
+cp                            # copy file
+cp file1 file2                # makes copy of file1 in current dir and names if file2
+cp /path/of/file ./           # copies the file from this path to your current dir
+mv                            # mv file (use to rename file as well)
+mv file1 file2                # renames file1 to file2 (same contents inside)
+touch                         # create empty file, or mostly used to update the timestamp a file
+chmod                         # change/modify file permissions (more later)
+wc                            # get counts of lines, words, characters in file (mostly used to count line with -l option)
+grep                          # return line(s) in file matching the pattern
+rm <file_name>                # removes file_name
+rmdir <dir_name>              # removes dir_name
+rm -rf <file/dir_name>        # so powerful command to remove almost anything (files, directories)
 ```
 
 ## Displaying contents of file on the screen
@@ -48,33 +48,33 @@ grep people usdoi.txt
 ```
 Some options:
 ```bash
--n              // along with the matching lines, print the line number also
--c              // get the count of matching lines
--i              // ignore the case of the text while matching
--v              // print all lines which do not contain the pattern
--w              // match only if the pattern matches whole words
+-n              # along with the matching lines, print the line number also
+-c              # get the count of matching lines
+-i              # ignore the case of the text while matching
+-v              # print all lines which do not contain the pattern
+-w              # match only if the pattern matches whole words
 ```
 One more example:
 ```bash
-grep -v login /etc/passwd               // prints all lines from the /etc/passwd file, which do not contain the pattern login
+grep -v login /etc/passwd               # prints all lines from the /etc/passwd file, which do not contain the pattern login
 ```
 * Using **find**: `$ find  // finds files in the current direcotry tree (this and all the directory inside of it)`.
 
 ## Compression and archiving
 ```bash
-tar       // archive a set of files
+tar       # archive a set of files
       (allows you to copy multiple files and directories into a single archive file)
-zip       // compress a set of files
-unzip     // extract files from a compressed zip archive
+zip       # compress a set of files
+unzip     # extract files from a compressed zip archive
 ```
 
 ## Networking
 ```bash
-hostname      // prints hostname
-ping        // send packets to URL and prints response, (CTRL-C) to cancel it
-ifconfig      // display or configure system network interfaces
-curl          // display contents of file at a URL
-wget        // download file from URL
+hostname      # prints hostname
+ping          # send packets to URL and prints response, (CTRL-C) to cancel it
+ifconfig      # display or configure system network interfaces
+curl          # display contents of file at a URL
+wget          # download file from URL
 ```
 
 `$ df -h  (shows amount of disk space available on the file system)` extra one to know more.
@@ -83,9 +83,9 @@ Now, let's discuss some of the important commands with more details and examples
 ## tar
 This command lets you to copy  multiple files and directories info into a single file. Some of the options choices are:
 ```bash
- -c            // create a new archive file
- -v            // verbosely list files processed
- -f            // archive file name
+ -c            # create a new archive file
+ -v            # verbosely list files processed
+ -f            # archive file name
 ```
 
 Example:
@@ -110,13 +110,13 @@ unzip bin.zip
 ## Permissions/ Chaning access rights
 Only the owner of a file can use `chmod` to change the permission of a file. Example like: `$ chomod go-rwx filename` will remove read, write, and execute permission from *filename* for the group and others. Another one: `$ chmod a+rw filename` will add to all the read, write permission to *filename*.
 ```bash
---r    // read
---w    // write
---x    // execute
+--r    # read
+--w    # write
+--x    # execute
 ```
 To see current permissions, `ls -l` or if you like to see the permission for a particular file `ls -l fileName.txt`, you should see something like
 ```bash
-rw--r--r--          // (owner read and write, group owner read only, others read only)
+rw--r--r--          # (owner read and write, group owner read only, others read only)
 ```
 Then we can now change the permissions of the file as per our requirements.
 
@@ -142,20 +142,25 @@ Running programming in your computer that has a unique **PID**. Just do `$ ps`. 
 **Running background processes**
 To background a process just type `&` at the end of the command line. Example:
 ```bash
-sleep 10
+sleep 10  # this won't do in bkg, it will take over your terminal prompt
 ```
 will wait given 10 seconds before continuing and giving you terminal to work. But you can run this sleep in background;
 ```bash
-sleep 10 &
+sleep 10 &   # to work in bkg
 ```
 And that will take care of the commands and take them to background. Similarly, sometimes `emacs` take away your terminal and so you do
 `&` at the end in that case as well.
 
 **Backgrounding the current foreground process**: already running thing can be also put into the background
 ```bash
-sleep 1000        // running sleep
-Ctrl+z              // suspend the process in the foreground to the bkg
-bg                // take the foreground program to the background
+sleep 1000          # running sleep
+Ctrl+z              # suspend (not running is stopped) the process in the foreground to the bkg
+bg                  # take the foreground program to the background
+bg %1               # runs the jobs that is in bkg and in top list [1]
+jobs                # now this job is running
+kill -STOP %1       # again stops this job from running, -STOP is a signal sent
+kill -KILL %2       # kills no matter nohup safe jobs
+man signal          # shows all the signals that could be sent to the terminal processes
 ```
 
 **Killing a process**
@@ -164,16 +169,16 @@ To kill the program running in the foreground `ctrl+c` will work.
 
 To kill the program suspended or background process:
 ```bash
-sleep 100 &
-jobs          
-kill %4           // here 4 is the job number let's say
+sleep 100 &  # this one sends the program to the bkg
+jobs         # shows all the suspended/bkg_running programs running         
+kill %4           # here 4 is the job number let's say
 ```
 
 **ps (process status)**
 You could kill using PIDS
 ```bash
 sleep 1000 &
-ps        // will list the PID to you
+ps        # will list the PID to you
 kill PID_you_want
 ```
 Type `ps` again to see its status. If the process refuses to be removed use `-9` option as
@@ -342,7 +347,7 @@ For **bash** shell: `#!/bin/bash`. Let's write down a simple *hello_world* scrip
 ```bash
 touch hello_world.sh
 echo '#!/bin/bash' >> hello_world.sh
-echo 'echo Hello World' >> hello_world.sh       // >> is the redirection operator to append to the file
+echo 'echo Hello World' >> hello_world.sh       # >> is the redirection operator to append to the file
 ```
 We need to make this file executable:
 
@@ -363,17 +368,17 @@ It has scope limited to shell (not global). They are all **small letters** to ma
 
 To list all shell variables
 ```bash
-set | head -4         // set will list all variables, but head -4 will restrict to only 4 of them to see
+set | head -4         # set will list all variables, but head -4 will restrict to only 4 of them to see
 ```
 
 How to define shell-variables: **$ var_name=value**
 ```bash
-GREETINGS="HELLO"            // we normally do all caps for the variables, and no spaces around = sign
-echo $GREETINGS       // to see the value of this variable, we put $ sign infront of it
+GREETINGS="HELLO"       # we normally do all caps for the variables, and no spaces around = sign
+echo $GREETINGS         # to see the value of this variable, we put $ sign infront of it
 ```
 
 ```bash
-**$ unset var_name**  // deletes var_name `$ unset GREETINGS`, then no longer now available
+**$ unset var_name**  # deletes var_name `$ unset GREETINGS`, then no longer now available
 ```
 
 ## Environment Variables
@@ -384,7 +389,7 @@ $ export GREETINGS
 
 To list all of the environment variables: `$ printenv | less` to see in easier *less* way.
 ```bash
-$ printenv | grep "GREE"     // env will list all, grep GREE will list only those that starts with GREE
+$ printenv | grep "GREE"     # env will list all, grep GREE will list only those that starts with GREE
 ```
 
 ## Some useful features of the Bash shell
@@ -1222,9 +1227,12 @@ awk output can also be pipe to some other programs.
 awk '{print NF, $0}' dukeofyork.txt | sort -n         # sort numeric col
 ```
 
-## Understanding Records and Fields
-
 ## Understanding Variables and Operators
+
+
+
+
+
 
 ## Quick intro to regex
 
