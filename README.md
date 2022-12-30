@@ -1225,18 +1225,86 @@ uptime | awk '{print NF, $0}'
 awk output can also be pipe to some other programs.
 ```bash
 awk '{print NF, $0}' dukeofyork.txt | sort -n         # sort numeric col
+# NR is another variable that represent the Record number (line number)
 ```
 
 ## Understanding Variables and Operators
+`NR` is the record number of a file or line number of a file. To print only the 6th line, let's say:
+```bash
+awk 'NR=6{print NR, $0}' dukeofyork.txt
+awk '{print NR, FILENAME, FNR, $0}' dukeofyork.txt
+# FILENAME prints filename being processed, FNR is filename record associated to the file being processed
 
-
-
-
-
+# to print last field, and one before the last field
+awk '{print $NF}' dukeofyork.txt     # NF is total field #, so last one will be printed
+awk '{print $(NF-1)}' dukeofyork.txt # field before the last one
+```
 
 ## Quick intro to regex
+Regular expression in awk is usually written in between slashes but can also be in between double quotes.
+`/abc/` matches "abc" in same order with nothing in between them, and it is always case-sensitive.
+```bash
+/abc/ matches "abc"
+/abc/ matches "xxabcxx"
+/abc/ does not match "abxxc"
+/abc/ does not match "ab"
+/abc/ does not match "ABC"
+
+/a.c/ matches "abc"   # dot (.) is a single character match
+/a.c/ matches "axc"   # or a(aything)c
+
+/a\.c/ matches "a.c"  # backslash (\) espaces the special meaning of the characters
+/a\\c/ matches "a\c"  # again, backslash espaces special meaning
+/a\/c/ matches "a/c"  # escapes the special meaning of the characters otherwise used in regex
+
+/^abc/ matches "abcd" # matches strings that begins with abc, caret match beginning with
+/^abc/ does not match "dabc"  # because, it won't begin with abc in this case
+
+/abc$/ does not match "abcd"   # $ things match that ends with
+/abc$/ matches "dabc"  # because it ends with abc
+
+# [] matches any character in set
+/a[xyz]c/ matches "axc"  # ayc or azc
+/a[xyz]c/ does not match "axyzc"  # brackets only matches single character from it
+/a[a-z]c/ mathces "aac"  # abc, ... azc. We have a range of characters that can match
+/a[a-zA-Z]c/ matches "aBc" # combined multiple ranges in one go
+/a[^a-z]c/ does not match "abc"  # caret (^) states that does not include the range class a-z
+
+* matches zero or more repeats
+
++ matches zero or more repeats
+
+? matches zero or more repeats
+
+{} specifies a number of repeats
+
+awk '/up/{print $0}' dukeofyork.txt   # searches string up in each row of line
+```
 
 ## Using Control Structures
+If else, for, etc.
+```bash
+awk '{ if (NF < 8) {print "short line:", $0} else { print "long line:", $0 } }' dukeofyork.txt
+
+## for loop
+# in a file called, firstthree.awk
+# looping on each line for all the fields
+{
+    for ( i=1; i<=3; i++ ){
+        print "Line " NR ", field " i ": " $i;
+    }
+}
+```
+
+
+
+
+
+
+
+
+
+
 
 ## Formatting the output
 
