@@ -1296,62 +1296,28 @@ awk '{ if (NF < 8) {print "short line:", $0} else { print "long line:", $0 } }' 
 }
 ```
 
-
-
-
-
-
-
-
-
-
-
 ## Formatting the output
+using `printf()` syntax. see format specifier for more.
+```bash
+awk -F, '{ printf("%s\t%s\t%d\n", $1, $2, $3) }' nameemailavg.csv  # -F, says that the field sep is comma in the file
+awk -F, '{ printf("%20s %30s %3d\n", $1, $2, $3) }' nameemailavg.csv  # with putting exact width of space
+awk -F, '{ printf("%-20s %-35s %3d\n", $1, $2, $3) }' nameemailavg.csv  # -20s will left justify strings, %6.2f for floats
+```
 
 ## Functions and Arrays
+```
+length([string])
+index(string, target)  # finds the start index of the target character in string
+match(string, regexp)  # same as above using regex to match
+substr(string, start, length)
+```
 
 ## Combining AWK with other tools
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```bash
+# lets add all the bytes of files that has .txt extensions
+# /\.txt$/  means need escape . and $ so that it has to be at the end of the line
+ls -l | awk '/\.txt$/{total += $5; print} END{print total}'  # print ls -l with filtered .txt files
+```
 
 
 
