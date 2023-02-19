@@ -3,7 +3,7 @@ A **shell** is a powerful user interface for UNIX-like operating system. It can 
 ## Starting with some basics
 
 ```bash
-pwd                   # tells you the current working directory with the complete path to reach from root dir
+pwd                   # current working directory with the complete path to reach from root dir
 ls                    # lists files and directories in your current dir
 ls -a                 # -a option allows you to list even the hidden files and folder
 mkdir <dir_name>      # makes the dir_name folder in current dir
@@ -316,6 +316,122 @@ mkdir -p stuff/{a..z}/{1..100}{z..a}  # creates giant web/tree of folders with o
 alias ll='ls -ltrh'    # for nicer long listings
 alias ll   # to see what command it's set up to
 unalias ll # after you are done with it, to remove it
+
+
+whoami   # print the user name currently logged in to the terminal
+man      # shows manual of other commands
+man pwd  # manual page of pwd
+clear    # clears screen
+ctrl+l   # same as above
+clear -x  # scorllable history
+pwd       # print working directory
+ls       # lists inside directory
+ls /path/to/dir/
+ls -ltr  # useful version of ls that shows more info
+ls -a  # to see even . or hidden files and dir
+cd    # change directory; to move around
+cd .. # move up one dir
+cd ../../ # two dir up
+cd /path/to/dir
+cd -  # toggle between current and last directory
+cd ~  # cd to home dir /home/username
+mkdir  # make dir
+mkdir summer winter # creates two dir
+mkdir summer/seeds  # make seeds dir using path
+mkdir -p fruits/apples  # creating nested dir
+touch file1 file2  # creates empty file; update timestamp
+rmdir dir1 dir2  # if dir empty
+rm -rf # much powerful delete
+rm -ri # asks before deleting; interactive mode
+cp  # to copy
+mv  # to move and rename
+open file # oepns files and dir
+xdg-open file/dir    # same thing but in linux
+cp -r orig final_dir # recursive copy 
+head file  # top 10 lines
+tail file  # last 5 lines
+head -n 20 file  # prints 20 line
+tail -f sys.log  # keeps printing as new things come at the end
+cat file # prints the contents of entire file
+cat file1 file2  # can be used to concatenate contents of two files
+cat -n file  # shows contents with line numbers as well
+less file  # read contents of file; interactive as well
+echo value  # echo back
+echo "Hello World" > newFile
+wc file # counts things
+ls -ltr | wc -l  # line numbers
+wc -l file # just line number
+cat file | wc -l  # pipe to count line in file
+sort file  # sorts contents of file line and prints
+sort -n num_file  # to do numeric sort
+sort -nr num_file  # sort in reverse order
+sort -nu num_duplicate_file # prints sorted and unique value only
+uniq favflavors.txt  # removes adjacent duplicate lines
+sort favflavors.txt | uniq  # now only once shown, same as sort -nu
+sort favflavors.txt | uniq -d # only show that has duplicates
+sort favflavors.txt | uniq -u # show non-duplicate i.e. only once appearing
+sort favflavors.txt | uniq -c # shows unique with counts i.e. value_counts
+find location criteria name_to_find # files and folders
+
+# find is used to match files and folders
+find . # find all in current dir; might be nested multiple levels
+find . -name '7' # name has 7; exact match
+find . -name '*7*' # now more options
+find . -name '*.py' # all py files in current dir
+find . -type d  # all dir
+find . -type f  # all files
+find . -type d -name '*E*' # combining type and name
+find . -type d -iname '*e*' # case in-sensitive
+
+# grep is used to match texts inside the files
+grep search_string files
+grep green file # searches word green in file
+grep -n green file # results with line number as well
+grep -nC 2 green file # gives 2 line context around find word
+grep -r "word_to_find" # searches recursively, every nested files in current dir
+grep -ri "chicken" . # -i is for case in-sensitive
+
+du  # finds sizes of files and directories
+du -h | sort -h | tail  # to see top 10 largest files/folder in current dir
+
+history  # shows previous commands
+!456   # runs that particular number of history command
+history | grep 'cookie' # checking somewhere in history cookie was used
+
+ps # allows you to view processess running in your computer
+ps axww | grep "Visual Studio Code" # to see if this program is running
+
+top  # shows top most memory intensive processes
+top -o mem  # shows sorted list of high intensive memory processes(Mac)
+
+kill # to kill processes
+kill pid
+kill -l  # lists all the kill signals we might want to use
+kill -15 pid  # sigterm gentle way of shutting down
+kill pid      # same as above
+kill -9 pid   # brutal force kill
+killall -9 name # kills all instances of name
+killall -9 root # kills all root programs
+
+jobs, bg, fg  # running in bkg and fg
+ctrl+c  # cancels the jobs
+ctrl+z   # suspends process; pauses
+jobs   # to list what are in bkg stopped; paused
+fg 2  # it will take fg and run again
+bg 1  # starts running but in bkg
+jobs  # to verify its running
+
+gzip  # compress files; reduces file sizes
+gzip -k filename  # keeps original; also compresses and give another .gz file
+gunzip file.gz   # unzips file
+
+tar  # group files and make single file; then zip them
+tar -cf archieve.tar file1 file2 # c:create, f:filename (target); not compressed
+tar -xf archieve.tar # x:extract; -z option to compress with tar also
+tar -tf   # -t to just view before untaring
+gzip -k archieve.tar  # now compressed archieve.tar.gz
+    # first uncompressed, and untar it
+
 ```
 
 
