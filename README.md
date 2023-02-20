@@ -432,6 +432,27 @@ tar -tf   # -t to just view before untaring
 gzip -k archieve.tar  # now compressed archieve.tar.gz
     # first uncompressed, and untar it
 
+alias  # define short custom commands for repetitive long commands otherwise
+alias ll='ls -ltr'
+alias  # just to see list of all alias currently
+
+xargs  # the output of a command can be used as the input (arguments) of another command
+command1 | xargs command2
+cat deadPlayers.txt | xargs rm  # remove the dead players in game from current list
+    # since rm could not take std input from cat output, it needs arguments
+    # xargs just does that, converts std output to arguments from second command
+    
+ln  # used to create links. Links are pointer to another file
+ # there are hard links and soft links
+ln file.txt hardlink.tx  # any change to any file will reflect to both
+ # if we delete original file, hardlink will still there same contents
+ln -s file.txt softlink.txt # -s option creates softlink
+ # deleting original file will make softlink not work
+ 
+ who  # displays the users logged in to the system
+ su <user>  # to switch to different users account
+ sudo    # super user do
+ passwd  # can change password
 ```
 
 
